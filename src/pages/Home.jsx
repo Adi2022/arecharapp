@@ -2,6 +2,8 @@ import React from 'react'
 import HomeBanner from '../components/HomeBanner';
 import HomeProductsInfo from '../components/HomeProductsInfo';
 import VitagolProductInfo from '../components/VitagolProductInfo';
+import WecareBanner from '../components/WecareBanner';
+import BookSlot from '../components/BookSlot';
 
 const Home = () => {
   return (
@@ -10,6 +12,8 @@ const Home = () => {
       <br/>
       <HomeProductsInfo/>
       <VitagolProductInfo/>
+      <WecareBanner/>
+      <BookSlot/>
     </div>
   )
 }
