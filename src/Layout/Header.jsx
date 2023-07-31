@@ -121,16 +121,17 @@ const Header = () => {
                 <img src={logo} alt="logo" style={{ width: "100px" }} />
               </Typography>
               <Button
-                color="inherit"
+                style={{color:"#000"}}
                 component={NavLink}
                 to="/login"
                 sx={{ mx: 1 }}
+				
               >
                 Login
               </Button>
               <Button
                 variant="contained"
-                color="secondary"
+				style={{backgroundColor:"#009090"}}
                 component={NavLink}
                 to="/shop-now"
                 sx={{ mx: 1 }}
