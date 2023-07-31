@@ -1,6 +1,7 @@
 import React from 'react'
 import HomeBanner from '../components/HomeBanner';
 import HomeProductsInfo from '../components/HomeProductsInfo';
+import VitagolProductInfo from '../components/VitagolProductInfo';
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <HomeBanner/>
       <br/>
       <HomeProductsInfo/>
+      <VitagolProductInfo/>
     </div>
   )
 }

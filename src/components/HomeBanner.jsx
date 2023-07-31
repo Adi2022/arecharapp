@@ -10,7 +10,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const HomeBanner = () => {
   return (
     <div style={{ background: 'linear-gradient(to right, lightgray 50%, lightbrown 50%)' }}>
-      <Carousel showArrows={true} showStatus={false} showThumbs={false} autoPlay={true} interval={500}>
+      <Carousel showArrows={true} showStatus={false} showThumbs={false} autoPlay={true} interval={500} color="#009090">
         {/* First Carousel Item */}
         <div>
           <Grid container spacing={2}>
