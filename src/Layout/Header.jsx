@@ -17,7 +17,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
+import Buttons from "../common/Buttons";
 const pages = [
   {
     path: "/",
@@ -129,15 +129,7 @@ const Header = () => {
               >
                 Login
               </Button>
-              <Button
-                variant="contained"
-				style={{backgroundColor:"#009090"}}
-                component={NavLink}
-                to="/shop-now"
-                sx={{ mx: 1 }}
-              >
-                Shop Now
-              </Button>
+              <Buttons title="Shop Now" />
               <IconButton color="inherit" component={NavLink} to="/cart">
                 {/* You can replace the shop icon below with your desired shop icon */}
                 <ShoppingCartOutlinedIcon />
