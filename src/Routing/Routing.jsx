@@ -9,6 +9,7 @@ import About from '../pages/About'
 import Blog from '../pages/Blog'
 import Impact from '../pages/Impact'
 import Header from '../Layout/Header'
+import Footer from '../Layout/Footer'
 
 const Routing = () => {
   return (
@@ -26,6 +27,7 @@ const Routing = () => {
 
 
       </Routes>
+      <Footer/>
       </BrowserRouter>
     </div>
   )

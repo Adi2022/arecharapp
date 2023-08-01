@@ -5,6 +5,11 @@ import VitagolProductInfo from '../components/VitagolProductInfo';
 import WecareBanner from '../components/WecareBanner';
 import BookSlot from '../components/BookSlot';
 import ReviewPage from '../components/ReviewPage';
+import BlogsPage from '../components/BlogsPage';
+import FaqsPage from '../components/FaqsPage';
+import YoutubeVideo from '../components/YoutubeVideo';
+import FeaturedProducts from '../components/FeaturedProducts';
+import LearnMore from '../components/LearnMore';
 
 const Home = () => {
   return (
@@ -16,6 +21,11 @@ const Home = () => {
       <WecareBanner/>
       <BookSlot/>
       <ReviewPage/>
+      <BlogsPage/>
+      <FaqsPage/>
+      <YoutubeVideo/>
+      <FeaturedProducts/>
+      <LearnMore/>
     </div>
   )
 }

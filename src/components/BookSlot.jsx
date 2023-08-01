@@ -11,7 +11,7 @@ const BookSlot = () => {
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
-				height: "80vh",
+				
 				borderRadius: "50px",
 				marginTop: "10%",
 			}}
@@ -31,7 +31,7 @@ const BookSlot = () => {
 					</Box>
 				</Grid>
 				<Grid item xs={12} sm={6}>
-					<img src={banner1} alt="Logo" style={{ width: "100%" }} />
+					<img src={banner1} alt="Logo" style={{ width: "100%",borderRadius:"50px" }} />
 				</Grid>
 			</Grid>
 		</Container>

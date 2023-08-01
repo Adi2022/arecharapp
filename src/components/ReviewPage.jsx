@@ -30,13 +30,28 @@ const ReviewPage = () => {
 	};
 
 	return (
-		<div style={{ backgroundColor: "#f0f0f0", marginTop: "2%",marginBottom:"2%" }}>
-			<Typography textAlign={"center"} color={"#009090"} fontWeight={"bold"} fontSize={"30px"} marginTop={"3%"} marginBottom={"3%"}>
+		<div style={{ backgroundColor: "#f0f0f0" }}>
+			<Typography
+				textAlign={"center"}
+				color={"#009090"}
+				fontWeight={"bold"}
+				fontSize={"30px"}
+				marginTop={"3%"}
+				marginBottom={"3%"}
+			>
 				Over 1000+ Reviews from Happy Customers
 			</Typography>
 			<Carousel {...carouselSettings}>
 				{carouselItems.map((item) => (
-					<div key={item.id} style={{ margin: "0 10px" }}>
+					<div
+						key={item.id}
+						style={{
+							margin: "0 10px",
+							marginBottom: "20px",
+							// Use MUI breakpoints for responsiveness
+							
+						}}
+					>
 						<Card
 							sx={{
 								backgroundColor: "white",
@@ -45,15 +60,15 @@ const ReviewPage = () => {
 								boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
 								height: "200px", // Adjust the height as needed
 								width: "200px",
-                                
+								marginBottom: "50px", // Add margin from the bottom
 							}}
 						>
 							<CardContent>
 								<Typography variant="h6" gutterBottom>
 									{item.text}
 								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									Some text content inside the card.
+								<Typography  color="#000" fontWeight={"bold"}>
+									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque quod culpa reprehenderit cupiditate distinctio.
 								</Typography>
 							</CardContent>
 						</Card>
