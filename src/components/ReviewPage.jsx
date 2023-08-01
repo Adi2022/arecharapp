@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, Grid } from "@mui/material";
 
 const ReviewPage = () => {
 	const carouselItems = [
@@ -41,40 +41,41 @@ const ReviewPage = () => {
 			>
 				Over 1000+ Reviews from Happy Customers
 			</Typography>
-			<Carousel {...carouselSettings}>
-				{carouselItems.map((item) => (
-					<div
-						key={item.id}
-						style={{
-							margin: "0 10px",
-							marginBottom: "20px",
-							// Use MUI breakpoints for responsiveness
-							
-						}}
-					>
-						<Card
-							sx={{
-								backgroundColor: "white",
-								border: "1px solid #ccc",
-								borderRadius: "8px",
-								boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-								height: "200px", // Adjust the height as needed
-								width: "200px",
-								marginBottom: "50px", // Add margin from the bottom
-							}}
-						>
-							<CardContent>
-								<Typography variant="h6" gutterBottom>
-									{item.text}
-								</Typography>
-								<Typography  color="#000" fontWeight={"bold"}>
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque quod culpa reprehenderit cupiditate distinctio.
-								</Typography>
-							</CardContent>
-						</Card>
-					</div>
-				))}
-			</Carousel>
+			<Grid
+				container
+				justifyContent="center" // Centers the cards horizontally
+				spacing={2} // Adjust the spacing between cards
+			>
+				<Grid item xs={12} sm={12} md={6} margin="auto" >
+					<Carousel {...carouselSettings}>
+						{carouselItems.map((item) => (
+							<div key={item.id}>
+								<Card
+									sx={{
+										backgroundColor: "white",
+										border: "1px solid #ccc",
+										borderRadius: "8px",
+										boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+										height: "200px", // Adjust the height as needed
+										width: "200px",
+										marginBottom: "50px", // Add margin from the bottom
+									}}
+								>
+									<CardContent>
+										<Typography variant="h6" gutterBottom>
+											{item.text}
+										</Typography>
+										<Typography color="#000" fontWeight={"bold"}>
+											Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque quod culpa reprehenderit
+											cupiditate distinctio.
+										</Typography>
+									</CardContent>
+								</Card>
+							</div>
+						))}
+					</Carousel>
+				</Grid>
+			</Grid>
 		</div>
 	);
 };

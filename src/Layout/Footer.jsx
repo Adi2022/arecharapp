@@ -39,10 +39,22 @@ const Footer = () => {
 										Follow us:
 									</Typography>
 									<Box display="flex" alignItems="center">
-										<FacebookOutlinedIcon style={{ width: 24, height: 24, marginRight: 2, color: "#3b5998" }} />
-										<TwitterIcon style={{ width: 24, height: 24, marginRight: 2, color: "#1da1f2" }} />
-										<LinkedInIcon style={{ width: 24, height: 24, color: "#0077b5" }} />
-										<InstagramIcon style={{ width: 24, height: 24, color: "#e4405f" }} />
+									<Link to="https://www.facebook.com/VitaGoliGummy" target="_blank" rel="noopener noreferrer">
+											<FacebookOutlinedIcon
+												style={{ width: 24, height: 24, marginRight: 2, color: "#3b5998" }}
+											/>
+										</Link>
+										<Link to="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
+											<TwitterIcon style={{ width: 24, height: 24, marginRight: 2, color: "#1da1f2" }} />
+										</Link>
+										<Link to="https://www.linkedin.com/company/78023607/" target="_blank" rel="noopener noreferrer">
+											<LinkedInIcon style={{ width: 24, height: 24, color: "#0077b5" }} />
+										</Link>
+										<Link to="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+										<Link to="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+											<InstagramIcon style={{ width: 24, height: 24, color: "#e4405f" }} />
+										</Link>
+										</Link>
 									</Box>
 								</Box>
 							</Grid>
