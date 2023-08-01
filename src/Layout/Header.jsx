@@ -104,7 +104,7 @@ const Header = () => {
                   <Typography
                     variant="subtitle1"
                     sx={{
-                      color: selectedPage === page.path ? "#FF7276" : "inherit",
+                      color: selectedPage === page.path ? "#009090" : "inherit",
                       fontWeight: selectedPage === page.path ? "bold" : "normal",
                     }}
                   >
