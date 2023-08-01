@@ -6,7 +6,7 @@ import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import payment from '../assets/payment.png'
+import payment from "../assets/payment.png";
 const Footer = () => {
 	const navigate = useNavigate();
 
@@ -15,29 +15,9 @@ const Footer = () => {
 	};
 
 	return (
-		<Box>
-            <Container maxWidth="lg" >
-			<footer style={{margin:"auto"}}>
-				<Box bgcolor="gray" color="white" py={2} px={3}>
-					<Container maxWidth="lg">
-						<Grid container justifyContent="space-between" alignItems="center">
-							<Grid item xs={12} sm={6}>
-								<Typography variant="h5">Submit Your enquiry right Now!</Typography>
-								<Typography variant="body1">{/* Your enquiry text goes here */}</Typography>
-							</Grid>
-							<Grid item xs={12} sm={6} textAlign="right">
-								<Button
-									variant="contained"
-									sx={{ backgroundColor: "gray", color: "white" }}
-									onClick={handleButtonClick}
-								>
-									Submit Now
-								</Button>{" "}
-							</Grid>
-						</Grid>
-					</Container>
-				</Box>
-				<Box py={2} style={{ color: "white" }}>
+		<Box bgcolor={"#000"} style={{color:"white"}}>
+			<footer style={{ margin: "auto" }}>
+				<Box py={2}>
 					<Container maxWidth="lg">
 						<Grid container spacing={2}>
 							<Grid item xs={12} sm={6} md={3} color={"gray"}>
@@ -47,7 +27,7 @@ const Footer = () => {
 								<p style={{ fontSize: "10px" }}>Subscribe our Newsletter for Exclusive Offers</p>
 								{/* Input box and button in flex layout */}
 								<Box display="flex" alignItems="center">
-									<TextField label="Your Email" variant="outlined" sx={{ marginRight: 1 }} />
+									<TextField   sx={{ marginRight: 1 ,backgroundColor: "#fff", color: "black",border:"2px solid black"}} border="2px"  />
 									<Button variant="contained" sx={{ backgroundColor: "#009090", color: "white" }}>
 										Subscribe
 									</Button>
@@ -132,15 +112,14 @@ const Footer = () => {
 									Terms & Conditions
 								</Typography>
 							</Grid>
-                            
+
 							<Grid item xs={12} sm={6} md={2}>
 								<img src={logo} style={{ width: "30%" }} alt="Logo" />
 							</Grid>
 						</Grid>
 					</Container>
 				</Box>
-			</footer>
-			<Box
+				<Box
 				sx={{
 					width: "40%",
 					height: "4px",
@@ -150,20 +129,20 @@ const Footer = () => {
 			/>
 			<Grid container sx={{ mt: 2 }} justifyContent="space-around" alignItems="center">
 				{/* Left Grid (Text) */}
-				<Grid item xs={12} sm={6} md={3}>
+				<Grid item xs={12} sm={6} md={3} style={{color:"white"}}>
 					<Typography variant="body1">Vitgoli Vitgoli Vitgoli Vitgoli</Typography>
-                    <Typography variant="body1">Vitgoli Vitgoli Vitgoli Vitgoli</Typography>
-
+					<Typography variant="body1">Vitgoli Vitgoli Vitgoli Vitgoli</Typography>
 				</Grid>
 
 				{/* Right Grid (Payment Methods) */}
 				<Grid item xs={12} sm={6} md={3}>
 					<p>We Accept</p>
-					<img src={payment} width="100%"/>
+					<img src={payment} width="100%" />
 				</Grid>
 			</Grid>
-            </Container>
-            </Box>
+			</footer>
+		
+		</Box>
 	);
 };
 
