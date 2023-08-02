@@ -30,13 +30,15 @@ const blogsData = [
 ];
 const styles = {
 	bannerTitleStyle1: {
-		fontWeight: 400,
+		fontWeight: "bold",
 		textAlign: "left",
 		fontFamily: "'Montserrat', sans-serif",
 		fontStyle: "normal",
-		fontSize: "25px",
+		fontSize: "20px",
 		color: "#000",
 		marginBottom: "20px",
+		lineHeight: "1.2",
+		letterSpacing: "-.02rem",
 
 		// Add responsive styles
 		"@media (max-width: 600px)": {
@@ -58,11 +60,11 @@ const styles = {
 };
 const BlogPageDifferentBlogs = () => {
 	return (
-		<Grid container spacing={2} marginBottom="6%" marginTop="4%">
+		<Grid container spacing={2} marginBottom="6%" marginTop="4%" >
 			{blogsData.map((blog, index) => (
 				<Grid item xs={12} sm={6} md={4} key={index}>
-					<Card >
-						<CardMedia component="img" height="200" image={blog.image} alt={blog.text} />
+					<Card>
+						<CardMedia component="img" height="200"  image={blog.image} alt={blog.text} />
 						<CardContent>
 							<Typography sx={styles.bannerTitleStyle1}>{blog.text}</Typography>
 							<Typography sx={styles.bannerTitleStyle2}>
