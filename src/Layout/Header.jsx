@@ -67,7 +67,7 @@ const Header = () => {
 	};
 
 	return (
-		<AppBar position="static" color="default" sx={{ backgroundColor: "#fff", color: "#000", fontWeight: "bold" }}>
+		<AppBar position="fixed" top="0" left="0" width="100%"  zIndex="99" color="default" sx={{ backgroundColor: "#fff", color: "#000", fontWeight: "bold" }}>
 			<Toolbar>
 				<Hidden mdUp>
 					<IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer}>

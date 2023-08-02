@@ -17,24 +17,24 @@ const styles = {
 
   bannerTitleStyle1: {
     color: "#009090",
-    fontWeight: "800",
+    fontWeight: "400",
     textAlign: "center",
-    fontFamily: "Baskerville",
-    fontStyle: "italic",
     fontSize: "60px",
+    fontFamily:"'Montserrat', sans-serif",
    
   },
   bannerTitleStyle2: {
     color: "black",
-    fontWeight: "600",
+    fontWeight: "400",
     textAlign: "center",
-    fontStyle: "italic",
+    fontFamily:"'Arizonia', cursive",
+    fontSize:"100px",
+    marginTop:"10%"
    
   },
   
 };
 const AboutPageHeading = () => {
-  const navigate = useNavigate();
  
 
   
