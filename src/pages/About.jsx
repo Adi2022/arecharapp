@@ -4,6 +4,8 @@ import AboutPageInfo from '../components/AboutPageInfo'
 import AboutPageVideo from '../components/AboutPageVideo'
 import AboutPageWhoWeAre from '../components/AboutPageWhoWeAre'
 import AboutPageFounder from '../components/AboutPageFounder'
+import AboutPageWhyChooseUs from '../components/AboutPageWhyChooseUs'
+import AboutPageCertifications from '../components/AboutPageCertifications'
 
 const About = () => {
   return (
@@ -13,6 +15,8 @@ const About = () => {
       <AboutPageVideo/>
       <AboutPageWhoWeAre/>
       <AboutPageFounder/>
+      <AboutPageWhyChooseUs/>
+      <AboutPageCertifications/>
     </div>
   )
 }
