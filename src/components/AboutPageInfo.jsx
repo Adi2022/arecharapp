@@ -19,11 +19,10 @@ const styles = {
 
   bannerTitleStyle1: {
     color:"#fff",
-    fontWeight: "800",
+    fontWeight: "light",
     textAlign: "center",
-    fontFamily: "Baskerville",
-    fontStyle: "italic",
-    fontSize: "20px",
+    fontFamily:"'Montserrat', sans-serif",
+    fontSize: "16px",
    
   },
  

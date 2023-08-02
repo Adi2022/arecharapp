@@ -66,11 +66,13 @@ const styles = {
 		fontSize: "16px",
 	},
 	centerHeading: {
+		fontWeight: 400,
 		textAlign: "center",
-		fontWeight: "bold",
+		fontFamily:"'Montserrat', sans-serif",
+		fontStyle: "normal",
 		fontSize: "50px",
 		color: "#009090",
-		marginBottom: "30px",
+		marginBottom: '20px',
 	},
 	bannerTitleStyle2: {
 		marginTop: "8%",

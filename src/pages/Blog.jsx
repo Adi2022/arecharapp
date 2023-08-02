@@ -1,8 +1,11 @@
 import React from 'react'
+import BlogPageBanner from '../anotherComponent/BlogPageBanner';
 
 const Blog = () => {
   return (
-    <div>Blog</div>
+    <div>
+      <BlogPageBanner/>
+    </div>
   )
 }
 

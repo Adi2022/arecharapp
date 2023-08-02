@@ -13,19 +13,19 @@ const styles = {
 	},
 
 	bannerTitleStyle1: {
-		fontWeight: "bold",
+		fontWeight: 400,
 		textAlign: "center",
-		fontFamily: "Baskerville",
+		fontFamily:"'Montserrat', sans-serif",
 		fontStyle: "normal",
 		fontSize: "50px",
 		color: "#009090",
+		marginBottom: '20px',
 	},
 	bannerTitleStyle2: {
 		fontWeight: "light",
 		textAlign: "center",
-		fontFamily: "Baskerville",
-		fontStyle: "italic",
-		fontSize: "20px",
+		fontFamily:"'Montserrat', sans-serif",
+		fontSize: "16px",
 	},
 };
 const AboutPageWhyChooseUs = () => {

@@ -16,12 +16,13 @@ const Image = styled('img')({
   width: '200px',
   height: '200px',
   objectFit: 'cover',
-  marginBottom: '20px',
+  marginBottom: '40px',
 });
 
 const Name = styled('div')({
-  fontSize: '44px',
-  fontWeight: 'normal',
+  fontSize: '40px',
+  marginBottom: '100px',
+  color:"GrayText"
 });
 
 const AboutPageFounder = () => {
