@@ -60,10 +60,10 @@ const styles = {
 };
 const BlogPageDifferentBlogs = () => {
 	return (
-		<Grid container spacing={2} marginBottom="6%" marginTop="4%" >
+		<Grid container spacing={2} marginBottom="6%" marginTop="4%" padding="4%" >
 			{blogsData.map((blog, index) => (
 				<Grid item xs={12} sm={6} md={4} key={index}>
-					<Card>
+					{/* <Card style={{border:"none",}}> */}
 						<CardMedia component="img" height="200"  image={blog.image} alt={blog.text} />
 						<CardContent>
 							<Typography sx={styles.bannerTitleStyle1}>{blog.text}</Typography>
@@ -73,7 +73,7 @@ const BlogPageDifferentBlogs = () => {
 								voluptatum!
 							</Typography>
 						</CardContent>
-					</Card>
+					{/* </Card> */}
 				</Grid>
 			))}
 		</Grid>
