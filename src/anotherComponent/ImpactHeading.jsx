@@ -33,10 +33,11 @@ const styles = {
 	},
     bannerTitleStyle3: {
 		color: "#000",
-		fontWeight: "400",
+		fontWeight: 300,
 		textAlign: "center",
 		fontSize: "16px",
 		fontFamily: "'Montserrat', sans-serif",
+		lineHeight:"1.65"
 		
 	},
 };

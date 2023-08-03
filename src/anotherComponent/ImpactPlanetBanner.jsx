@@ -30,12 +30,12 @@ const styles = {
 		},
 	},
 	bannerTitleStyle2: {
-		fontWeight: 200,
-		textAlign: "left",
-		fontFamily: "'Montserrat', sans-serif",
-		fontStyle: "normal",
-		fontSize: "15px",
 		color: "#000",
+		fontWeight: 300,
+		textAlign: "center",
+		fontSize: "16px",
+		fontFamily: "'Montserrat', sans-serif",
+		lineHeight:"1.65",
 		marginBottom: "20px",
 	},
 };
