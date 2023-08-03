@@ -67,7 +67,18 @@ const Header = () => {
 	};
 
 	return (
-		<AppBar position="fixed" top="0" left="0" width="100%"  zIndex="99" color="default" sx={{ backgroundColor: "#fff", color: "#000", fontWeight: "bold" }}>
+		<AppBar
+			position="fixed"
+			top="0"
+			left="0"
+			width="100%"
+			zIndex="99"
+			color="default"
+			sx={{ backgroundColor: "#fff", color: "#000", fontWeight: "bold" }}
+		>
+			<Typography textAlign={"center"} style={{ backgroundColor: "#009090", color: "#fff",fontSize:"12px" }}>
+				Get Flat 20% Off Use Promocode: VITAGOLI20
+			</Typography>
 			<Toolbar>
 				<Hidden mdUp>
 					<IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer}>
@@ -116,7 +127,7 @@ const Header = () => {
 							<Buttons title="Shop Now" />
 							<IconButton color="inherit" component={NavLink} to="/cart">
 								{/* You can replace the shop icon below with your desired shop icon */}
-								<ShoppingCartOutlinedIcon />
+								<ShoppingCartOutlinedIcon /> 0
 							</IconButton>
 						</Box>
 					</Box>
