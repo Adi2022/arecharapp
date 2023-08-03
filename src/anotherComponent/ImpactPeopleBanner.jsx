@@ -1,14 +1,15 @@
 import React from "react";
-import { Box, Typography, Container, Grid,CardContent } from "@mui/material";
+import people from "../assets/people-img.jpg";
+import { Box, Typography, Container,Grid,CardContent } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Fade from "@mui/material/Fade";
-import Planet from "../assets/planet-img.jpg";
 
 const blogsData = [
-	{ text: "Better Packing" },
-	{ text: "Better Health" },
+	{ text: "Better People" },
+	{ text: "Better Workplace" },
 	
 ];
+
 const styles = {
 	bannerTitleStyle1: {
 		fontWeight: "bold",
@@ -39,15 +40,16 @@ const styles = {
 		marginBottom: "20px",
 	},
 };
-
-const ImpactPlanetBanner = () => {
+const ImpactPeopleBanner = () => {
 	const checked = true;
 
 	return (
 		<Box py={4} bgcolor="white" color="black">
 			<Fade in={checked === true} timeout={1000}>
-				<img src={Planet} alt="Blog Banner" style={{ width: "100%" }} />
+				<img src={people} alt="Blog Banner" style={{ width: "100%",  }} />
 			</Fade>
+            <Box py={4} bgcolor="white" color="black">
+			
 			<Grid container spacing={2} marginBottom="6%" marginTop="4%" padding="4%">
 				{blogsData.map((blog, index) => (
 					<Grid item xs={12} sm={6} md={6} key={index}>
@@ -63,7 +65,8 @@ const ImpactPlanetBanner = () => {
 				))}
 			</Grid>
 		</Box>
+		</Box>
 	);
 };
 
-export default ImpactPlanetBanner;
+export default ImpactPeopleBanner;
