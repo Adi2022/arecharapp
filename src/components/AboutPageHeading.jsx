@@ -29,7 +29,10 @@ const styles = {
     textAlign: "center",
     fontFamily:"'Arizonia', cursive",
     fontSize:"100px",
-    marginTop:"10%"
+    marginTop:{
+      md:"12%",
+      xs:"25%"
+    }
    
   },
   
