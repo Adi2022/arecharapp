@@ -10,6 +10,8 @@ import Blog from '../pages/Blog'
 import Impact from '../pages/Impact'
 import Header from '../Layout/Header'
 import Footer from '../Layout/Footer'
+import ProductVitagoli from '../ProductComponents/ProductVitagoli'
+import ProductVitagoliPre from '../ProductComponents/ProductVitagoliPre'
 
 const Routing = () => {
   return (
@@ -24,6 +26,8 @@ const Routing = () => {
         <Route exact path="/about" element={<About/>}/>
         <Route exact path="/blog" element={<Blog/>}/>
         <Route exact path="/impact" element={<Impact/>}/>
+        <Route exact  path="/productVitagoli" element={<Products/>}/>
+        <Route  path="/productVitagoliPre" element={<ProductVitagoliPre/>}/>
 
 
       </Routes>

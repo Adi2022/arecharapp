@@ -11,6 +11,8 @@ import {
 	ListItem,
 	ListItemText,
 	Hidden,
+	Menu,
+	MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
@@ -18,6 +20,8 @@ import logo from "../assets/logo.png";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Buttons from "../common/Buttons";
+import { styled } from '@mui/material/styles';
+
 const pages = [
 	{
 		path: "/",
@@ -49,9 +53,24 @@ const pages = [
 	},
 ];
 
+const styles={
+	main:{
+		padding:"7px 5px 7px 20px",
+		borderBottom:"1px solid #adadad",
+		display:"block",
+		fontSize:"13px",
+		color: '#58595B',
+		textTransform:"uppercase",
+		fontFamily: 'Montserrat, sans-serif',
+
+	}
+
+}
+
 const Header = () => {
 	const [drawerOpen, setDrawerOpen] = React.useState(false);
-	const [selectedPage, setSelectedPage] = React.useState(pages[0].path); // Initially select the first page
+	const [selectedPage, setSelectedPage] = React.useState(pages[0].path);
+	const [anchorEl, setAnchorEl] = React.useState(null);
 
 	const toggleDrawer = () => {
 		setDrawerOpen(!drawerOpen);
@@ -66,6 +85,14 @@ const Header = () => {
 		closeDrawer();
 	};
 
+	const handleMenuOpen = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleMenuClose = () => {
+		setAnchorEl(null);
+	};
+
 	return (
 		<AppBar
 			position="fixed"
@@ -76,7 +103,7 @@ const Header = () => {
 			color="default"
 			sx={{ backgroundColor: "#fff", color: "#000", fontWeight: "bold" }}
 		>
-			<Typography textAlign={"center"} style={{ backgroundColor: "#009090", color: "#fff",fontSize:"12px" }}>
+			<Typography textAlign={"center"} style={{ backgroundColor: "#009090", color: "#fff", fontSize: "12px" }}>
 				Get Flat 20% Off Use Promocode: VITAGOLI20
 			</Typography>
 			<Toolbar>
@@ -91,28 +118,61 @@ const Header = () => {
 						{/* Left Section */}
 						<Box sx={{ display: "flex", alignItems: "center" }}>
 							{pages.map((page) => (
-								<Button
-									key={page.title}
-									color="inherit"
-									component={NavLink}
-									to={page.path}
-									sx={{
-										mx: 1,
-										textDecoration: selectedPage === page.path ? "underline" : "none",
-										fontWeight: selectedPage === page.path ? "bold" : "normal",
-									}}
-									onClick={() => handlePageClick(page.path)}
-								>
-									<Typography
-										variant="subtitle1"
-										sx={{
-											color: selectedPage === page.path ? "#009090" : "inherit",
-											fontWeight: selectedPage === page.path ? "bold" : "normal",
-										}}
-									>
-										{page.title}
-									</Typography>
-								</Button>
+								<React.Fragment key={page.title}>
+									{page.title === "Products" ? (
+										<React.Fragment>
+											<Button
+												color="inherit"
+												sx={{
+													mx: 1,
+													textDecoration: selectedPage === page.path ? "underline" : "none",
+													fontWeight: selectedPage === page.path ? "bold" : "normal",
+												}}
+												onClick={handleMenuOpen}
+											>
+												<Typography
+													variant="subtitle1"
+													sx={{
+														color: selectedPage === page.path ? "#009090" : "inherit",
+														fontWeight: selectedPage === page.path ? "bold" : "normal",
+													}}
+												>
+													{page.title}
+												</Typography>
+											</Button>
+											<Menu  anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+												<MenuItem style={styles.main}component={NavLink} to="/productVitagoli" onClick={handleMenuClose}>
+													Vitagoli Vitamin Gummies Hair, Skin and Nails
+												</MenuItem>
+												<MenuItem style={styles.main}component={NavLink} to="/productVitagoliPre" onClick={handleMenuClose}>
+													Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA
+												</MenuItem>
+											</Menu>
+										</React.Fragment>
+									) : (
+										<Button
+											color="inherit"
+											component={NavLink}
+											to={page.path}
+											sx={{
+												mx: 1,
+												textDecoration: selectedPage === page.path ? "underline" : "none",
+												fontWeight: selectedPage === page.path ? "bold" : "normal",
+											}}
+											onClick={() => handlePageClick(page.path)}
+										>
+											<Typography
+												variant="subtitle1"
+												sx={{
+													color: selectedPage === page.path ? "#009090" : "inherit",
+													fontWeight: selectedPage === page.path ? "bold" : "normal",
+												}}
+											>
+												{page.title}
+											</Typography>
+										</Button>
+									)}
+								</React.Fragment>
 							))}
 						</Box>
 
@@ -126,7 +186,6 @@ const Header = () => {
 							</Button>
 							<Buttons title="Shop Now" />
 							<IconButton color="inherit" component={NavLink} to="/cart">
-								{/* You can replace the shop icon below with your desired shop icon */}
 								<ShoppingCartOutlinedIcon /> 0
 							</IconButton>
 						</Box>

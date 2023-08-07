@@ -1,0 +1,38 @@
+/* Carousel container */
+.carousel {
+    position: relative;
+    max-width: 600px; /* Adjust as needed */
+    margin: 0 auto;
+  }
+  
+  /* Image inside the carousel */
+  .carousel-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Arrows */
+  .carousel-arrow-left,
+  .carousel-arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .carousel-arrow-left {
+    left: 20px;
+  }
+  
+  .carousel-arrow-right {
+    right: 20px;
+  }
+  
+  /* Optional: Add hover styles for arrows */
+  .carousel-arrow-left:hover,
+  .carousel-arrow-right:hover {
+    color: #007bff; /* Change to your preferred color */
+  }
+  
