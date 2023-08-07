@@ -17,20 +17,26 @@ const styles = {
 		color: "#000",
 		fontWeight: "light",
 		textAlign: "center",
-		fontSize: "30px",
+		fontSize: "40px",
 		fontFamily: "'Montserrat', sans-serif",
 		
 		textTransform: "uppercase",
-		marginTop:"1%"
+		marginTop:"1%",
+		lineHeight:"48px",
+		letterSpacing:"-2px",
+		width: "100%"
 	},
 	bannerTitleStyle2: {
 		color: "#000",
 		fontWeight: "light",
 		textAlign: "center",
-		fontSize: "20px",
+		fontSize: "18px",
 		fontFamily: "Montserrat, sans-serif",
 		textTransform: "uppercase",
-		marginTop:"2%"
+		marginTop:"2%",
+		lineHeight:"23px",
+		letterSpacing:"-1px",
+		width: "100%"
 	},
 	bannerTitleStyle3: {
 		color: "#000",
