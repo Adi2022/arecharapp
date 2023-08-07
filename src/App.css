@@ -1,5 +1,14 @@
-.carousel-container{
-  width:"100%";
-  
+.carousel-container {
+  width: 100!important;
+  overflow: hidden!important;
 }
 
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease !important; /* Add a transition for smooth sliding */
+}
+
+.carousel img {
+  width: 100%!important; /* Adjust this to the appropriate width for your design */
+  height: auto!important;
+}

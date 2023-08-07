@@ -21,6 +21,7 @@ const styles = {
 		fontFamily: "'Montserrat', sans-serif",
 		
 		textTransform: "uppercase",
+		marginTop:"1%"
 	},
 	bannerTitleStyle2: {
 		color: "#000",
@@ -29,7 +30,7 @@ const styles = {
 		fontSize: "20px",
 		fontFamily: "Montserrat, sans-serif",
 		textTransform: "uppercase",
-		
+		marginTop:"2%"
 	},
 	bannerTitleStyle3: {
 		color: "#000",

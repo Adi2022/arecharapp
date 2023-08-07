@@ -29,12 +29,13 @@ const ProductTypes = () => {
       <div className="carousel">
         <Carousel itemsToShow={3} itemsToScroll={3}>
           {visibleImages.map((image, index) => (
-            <img
-              key={index}
-              
-              src={image}
-              alt={`Slide ${currentImageIndex + 1}`}
-            />
+            <div key={index} className="carousel-image-container"> {/* Wrap each image in a div */}
+              <img
+                src={image}
+                alt={`Slide ${currentImageIndex + 1}`}
+                style={{ margin: '10px' }} 
+              />
+            </div>
           ))}
         </Carousel>
       </div>
