@@ -31,7 +31,7 @@ const BlogsPage = () => {
    <Box>
     <Typography textAlign={"center"} fontWeight={"bold"} fontSize={"30px"} color={"#009090"}>Our Blogs</Typography>
      <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Grid item xs={12} sm={10} md={8} lg={6} sx={{ position: 'relative' }}>
+      <Grid item xs={12} sm={10} md={12} lg={6} sx={{ position: 'relative' }}>
         <SwipeableViews
           index={activeStep}
           onChangeIndex={setActiveStep}
@@ -45,11 +45,11 @@ const BlogsPage = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                minHeight: '300px',
-                width:"100%" // Set a minimum height to ensure the cards are visible
+               
+               
               }}
             >
-              <Card sx={{ maxWidth: 400,border:2 }} >
+              <Card sx={{ border:2 }} >
                 <CardMedia component="img" src={item.image} alt={`Banner ${index + 1}`} />
                <Box padding={"4%"}>
                <Typography >

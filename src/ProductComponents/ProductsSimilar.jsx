@@ -39,6 +39,9 @@ const ProductsSimilar = () => {
   ];
 
   return (
+   <>
+   <Typography textAlign="center" fontSize="22px" fontWeight="600" marginBottom="40px">Similar Products
+</Typography>
     <Carousel breakPoints={carouselBreakpoints}>
       {blogsData.map((blog, index) => (
         <Grid item xs={12} sm={6} md={6} key={index}>
@@ -81,6 +84,7 @@ const ProductsSimilar = () => {
         </Grid>
       ))}
     </Carousel>
+   </>
   );
 };
 

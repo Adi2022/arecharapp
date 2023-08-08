@@ -23,6 +23,7 @@ const Products = () => {
     <ProductBenefit/>
     <Product9Benefits/>
     <ProductsSimilar/>
+  
     </div>
   )
 }

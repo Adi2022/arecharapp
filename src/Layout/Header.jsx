@@ -20,8 +20,8 @@ import logo from "../assets/logo.png";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Buttons from "../common/Buttons";
-import { styled } from '@mui/material/styles';
-
+import { styled } from "@mui/material/styles";
+import mobile from "../assets/Mobile-01.jpg";
 const pages = [
 	{
 		path: "/",
@@ -53,24 +53,23 @@ const pages = [
 	},
 ];
 
-const styles={
-	main:{
-		padding:"7px 5px 7px 20px",
-		borderBottom:"1px solid #adadad",
-		display:"block",
-		fontSize:"13px",
-		color: '#58595B',
-		textTransform:"uppercase",
-		fontFamily: 'Montserrat, sans-serif',
-
-	}
-
-}
+const styles = {
+	main: {
+		padding: "7px 5px 7px 20px",
+		borderBottom: "1px solid #adadad",
+		display: "block",
+		fontSize: "13px",
+		color: "#58595B",
+		textTransform: "uppercase",
+		fontFamily: "Montserrat, sans-serif",
+	},
+};
 
 const Header = () => {
 	const [drawerOpen, setDrawerOpen] = React.useState(false);
 	const [selectedPage, setSelectedPage] = React.useState(pages[0].path);
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [productsMenuOpen, setProductsMenuOpen] = React.useState(false);
 
 	const toggleDrawer = () => {
 		setDrawerOpen(!drawerOpen);
@@ -92,7 +91,13 @@ const Header = () => {
 	const handleMenuClose = () => {
 		setAnchorEl(null);
 	};
+	const handleProductsMenuOpen = () => {
+		setProductsMenuOpen(true);
+	};
 
+	const handleProductsMenuClose = () => {
+		setProductsMenuOpen(false);
+	};
 	return (
 		<AppBar
 			position="fixed"
@@ -128,7 +133,8 @@ const Header = () => {
 													textDecoration: selectedPage === page.path ? "underline" : "none",
 													fontWeight: selectedPage === page.path ? "bold" : "normal",
 												}}
-												onClick={handleMenuOpen}
+												onMouseEnter={handleProductsMenuOpen}
+												onMouseLeave={handleProductsMenuClose}
 											>
 												<Typography
 													variant="subtitle1"
@@ -140,14 +146,33 @@ const Header = () => {
 													{page.title}
 												</Typography>
 											</Button>
-											<Menu  anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-												<MenuItem style={styles.main}component={NavLink} to="/productVitagoli" onClick={handleMenuClose}>
-													Vitagoli Vitamin Gummies Hair, Skin and Nails
-												</MenuItem>
-												<MenuItem style={styles.main}component={NavLink} to="/productVitagoliPre" onClick={handleMenuClose}>
-													Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA
-												</MenuItem>
-											</Menu>
+											<Menu
+									anchorEl={anchorEl}
+									open={productsMenuOpen}
+									onClose={handleProductsMenuClose}
+									onMouseEnter={handleProductsMenuOpen} // Keep the menu open when hovering over it
+									onMouseLeave={handleProductsMenuClose} // Close the menu when not hovering
+									anchorOrigin={{ vertical: "top" }} // Adjust menu position
+									transformOrigin={{ vertical: "top",  }} // Adjust menu position
+									style={{cursor:"pointer"}}
+								>
+									<MenuItem
+										style={styles.main}
+										component={NavLink}
+										to="/productVitagoli"
+										onClick={handleProductsMenuClose}
+									>
+										Vitagoli Vitamin Gummies Hair, Skin and Nails
+									</MenuItem>
+									<MenuItem
+										style={styles.main}
+										component={NavLink}
+										to="/productVitagoliPre"
+										onClick={handleProductsMenuClose}
+									>
+										Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA
+									</MenuItem>
+								</Menu>
 										</React.Fragment>
 									) : (
 										<Button
@@ -184,7 +209,9 @@ const Header = () => {
 							<Button style={{ color: "#000" }} component={NavLink} to="/login" sx={{ mx: 1 }}>
 								Login
 							</Button>
-							<Buttons title="Shop Now" />
+							
+							<Button  style={{ color: "#fff",backgroundColor:"#009090" }} component={NavLink} to="/shop">Shop Now</Button>
+							
 							<IconButton color="inherit" component={NavLink} to="/cart">
 								<ShoppingCartOutlinedIcon /> 0
 							</IconButton>
@@ -194,6 +221,18 @@ const Header = () => {
 			</Toolbar>
 
 			<Hidden mdUp>
+				<Box sx={{ display: "flex", alignItems: "center", marginTop: "-12%", justifyContent: "space-around" }}>
+					<Typography variant="h6" component="div">
+						<img src={logo} alt="logo" style={{ width: "100px" }} />
+					</Typography>
+					<Button style={{ color: "#000" }} component={NavLink} to="/login" sx={{ mx: 1 }}>
+						Login
+					</Button>
+					<Buttons title="Shop Now" />
+					<IconButton color="inherit" component={NavLink} to="/cart">
+						<ShoppingCartOutlinedIcon /> 0
+					</IconButton>
+				</Box>
 				<Drawer anchor="left" open={drawerOpen} onClose={closeDrawer}>
 					<List>
 						{pages.map((page) => (
@@ -209,6 +248,18 @@ const Header = () => {
 								<ListItemText primary={page.title} />
 							</ListItem>
 						))}
+						<Box sx={{ display: "flex", alignItems: "center" }}>
+							<Typography variant="h6" component="div">
+								<img src={logo} alt="logo" style={{ width: "100px" }} />
+							</Typography>
+							<Button style={{ color: "#000" }} component={NavLink} to="/login" sx={{ mx: 1 }}>
+								Login
+							</Button>
+							<Buttons title="Shop Now" />
+							<IconButton color="inherit" component={NavLink} to="/cart">
+								<ShoppingCartOutlinedIcon /> 0
+							</IconButton>
+						</Box>
 					</List>
 				</Drawer>
 			</Hidden>
