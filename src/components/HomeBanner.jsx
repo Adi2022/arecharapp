@@ -1,101 +1,102 @@
-import React from 'react';
-import { Grid, Typography } from '@mui/material';
-import banner from '../assets/banner.png';
-import banner1 from '../assets/banner1.png';
-import banner2 from '../assets/banner2.png';
-import banner3 from '../assets/banner3.png';
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Box, Grid, Typography ,Modal,TextField} from "@mui/material";
+import carousel1 from "../assets/carousel-1.jpg";
+import carousel2 from "../assets/carousel-1.jpg";
+import carousel3 from "../assets/carousel-1.jpg";
+import carousel4 from "../assets/carousel-1.jpg";
+import banner from "../assets/preImage1.png";
+import { Paper, Button } from "@mui/material";
+import {useState} from 'react'
+import Carousel from "react-material-ui-carousel";
+import { Paper as CarouselPaper } from "@mui/material";
+
+
+const carouselImages = [carousel1, carousel2, carousel3, carousel4];
+
+const styles = {
+  main: {
+    position: "relative",
+    marginTop:{
+      xs:"8.4rem",
+      md:"9rem"
+    }
+  },
+  callQueryButton: {
+    transform: "rotate(-90deg)",
+    backgroundColor: "#009090",
+    color: "#fff",
+    
+
+    "@media (max-width: 600px)": {
+      width: "100px", // Adjusted width for medium screens
+      height: "50px", // Adjusted height for medium screens
+    },
+    "@media (max-width: 400px)": {
+      width: "40px", // Adjusted width for small screens
+      height: "40px", // Adjusted height for small screens
+    },
+    "@media (max-width: 320px)": {
+      width: "30px", // Adjusted width for extra small screens
+      height: "30px", // Adjusted height for extra small screens
+    },
+  },
+  buttonContainer: {
+    position: "absolute",
+    top: "50%",
+    right: "0px",
+    transform: "translateY(-50%)",
+    zIndex: 999,
+  },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: "20px",
+    width: "300px",
+    borderRadius: "8px",
+  },
+};
 
 const HomeBanner = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div style={{ background: 'linear-gradient(to right, lightgray 50%, lightbrown 50%)' }}>
-      <Carousel showArrows={true} showStatus={false} showThumbs={false} autoPlay={true} interval={500} color="#009090">
-        {/* First Carousel Item */}
-        <div>
-          <Grid container spacing={2}>
-            {/* Left Grid: Banner */}
-            <Grid item xs={12} sm={6}>
-              <img src={banner} alt="Banner" style={{ width: '100%', height: 'auto' }} />
-            </Grid>
-
-            {/* Right Grid: Text */}
-            <Grid item xs={12} sm={6}>
-              <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                <div style={{ padding: '20px' }}>
-                  <Typography>
-                    Victory for every woman's
-                  </Typography>
-                  <Typography>
-                    Complete Well Being
-                  </Typography>
-                </div>
-              </div>
-            </Grid>
-          </Grid>
-        </div>
-
-        {/* Second Carousel Item */}
-        <div>
-          <Grid container spacing={2}>
-            {/* Left Grid: Banner */}
-            <Grid item xs={12} sm={6}>
-              <img src={banner1} alt="Banner 1" style={{ width: '100%', height: 'auto' }} />
-            </Grid>
-
-            {/* Right Grid: Text */}
-            <Grid item xs={12} sm={6}>
-              <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                <div style={{ padding: '20px' }}>
-                  <p>This is some text on the right side.</p>
-                  <p>It can be any content you want to display.</p>
-                </div>
-              </div>
-            </Grid>
-          </Grid>
-        </div>
-
-        {/* Third Carousel Item */}
-        <div>
-          <Grid container spacing={2}>
-            {/* Left Grid: Banner */}
-            <Grid item xs={12} sm={6}>
-              <img src={banner2} alt="Banner 2" style={{ width: '100%', height: 'auto' }} />
-            </Grid>
-
-            {/* Right Grid: Text */}
-            <Grid item xs={12} sm={6}>
-              <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                <div style={{ padding: '20px' }}>
-                  <p>This is some text on the right side.</p>
-                  <p>It can be any content you want to display.</p>
-                </div>
-              </div>
-            </Grid>
-          </Grid>
-        </div>
-
-        {/* Fourth Carousel Item */}
-        <div>
-          <Grid container spacing={2}>
-            {/* Left Grid: Banner */}
-            <Grid item xs={12} sm={6}>
-              <img src={banner3} alt="Banner 3" style={{ width: '100%', height: 'auto' }} />
-            </Grid>
-
-            {/* Right Grid: Text */}
-            <Grid item xs={12} sm={6}>
-              <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                <div style={{ padding: '20px' }}>
-                  <p>This is some text on the right side.</p>
-                  <p>It can be any content you want to display.</p>
-                </div>
-              </div>
-            </Grid>
-          </Grid>
-        </div>
+    <Box sx={styles.main}>
+      <Carousel>
+        {carouselImages.map((image, index) => (
+          <CarouselPaper key={index}>
+            <img src={image} alt={`Carousel ${index}`} style={{ width: "100%" }} />
+          </CarouselPaper>
+        ))}
       </Carousel>
-    </div>
+      <Box sx={styles.buttonContainer}>
+        <Button
+          sx={styles.callQueryButton}
+          onClick={handleOpenModal}
+        >
+          Call Query
+        </Button>
+      </Box>
+      <Modal open={isModalOpen} onClose={handleCloseModal} sx={styles.modal}>
+        <Box sx={styles.modalContent}>
+          <TextField label="Name" variant="outlined" fullWidth margin="normal" />
+          <TextField label="Email" variant="outlined" fullWidth margin="normal" />
+          <Button variant="contained" color="primary" fullWidth>
+            Submit
+          </Button>
+        </Box>
+      </Modal>
+    </Box>
   );
 };
 

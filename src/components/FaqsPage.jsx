@@ -5,39 +5,40 @@ import { Card, CardContent, Typography, Box } from "@mui/material";
 
 const FaqsPage = () => {
   const carouselItems = [
-    { id: 1, text: "Card 1" },
-    { id: 2, text: "Card 2" },
-    { id: 3, text: "Card 3" },
-    { id: 4, text: "Card 4" },
-    { id: 5, text: "Card 5" },
-    { id: 6, text: "Card 6" },
-    { id: 7, text: "Card 7" },
+    { id: 1, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
+    { id: 2, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
+    { id: 3, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
+    { id: 4, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
+    { id: 5, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
+    { id: 6, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
+    { id: 7, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
   ];
+
+  const isSmallScreen = window.innerWidth <= 600; // Adjust breakpoint as needed
+  const visibleCards = isSmallScreen ? 1 : 3;
 
   const carouselSettings = {
     autoPlay: true,
     infiniteLoop: true,
     showStatus: false,
     showThumbs: false,
-    interval: 3000, // Change this value to control the slide duration
-    centerMode: true,
-    centerSlidePercentage: 30,
-    selectedItem: 2, // Change this value to control which card is initially visible
+    interval: 3000,
+    centerMode: !isSmallScreen,
+    centerSlidePercentage: isSmallScreen ? 100 : 30,
+    selectedItem: 2,
+    showArrows: !visibleCards,
     onClickItem: (index) => {
-      // Handle the click on carousel item here (optional)
       console.log(`Clicked on card ${index + 1}`);
     },
   };
 
   return (
-    <div>
+    <Box>
       <Box
         sx={{
-          width: "40%",
-          height: "4px",
           background: "linear-gradient(to right, #e1e1e1, #000)",
           margin: "auto",
-          marginTop:"2%"
+          marginTop: "2%",
         }}
       />
       <Typography
@@ -57,22 +58,19 @@ const FaqsPage = () => {
             style={{
               margin: "0 10px",
               marginBottom: "20px",
-              // Use MUI breakpoints for responsiveness
             }}
           >
-          
+            <Card>
               <CardContent>
-              <Typography color="#000" fontWeight={"bold"} textAlign={"left"}>
-                 1.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque
-                  quod culpa reprehenderit cupiditate distinctio.
+                <Typography color="#000" fontWeight={"bold"} textAlign={"left"}>
+                  {item.text}
                 </Typography>
-                <br/>
-                <Typography color="#000"  textAlign={"left"}>
-                 Ans-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque
-                  quod culpa reprehenderit cupiditate distinctio.
+                <br />
+                <Typography color="#000" textAlign={"left"}>
+                  Ans - {item.text}
                 </Typography>
               </CardContent>
-            
+            </Card>
           </div>
         ))}
       </Carousel>
@@ -84,7 +82,7 @@ const FaqsPage = () => {
           margin: "auto",
         }}
       />
-    </div>
+    </Box>
   );
 };
 

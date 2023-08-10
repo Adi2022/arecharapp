@@ -1,8 +1,27 @@
-import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Card, CardContent, Typography, Grid } from "@mui/material";
-
+import React, { useState } from "react";
+import Carousel from "react-elastic-carousel";
+import { Box, Card, CardContent, Typography } from "@mui/material";
+const styles = {
+	bannerTitleStyle1: {
+		textAlign: "center",
+		margin: "4%",
+		padding: "5%",
+	},
+	main: {
+		backgroundColor: "#f2f2f2",
+		marginBottom: "4%",
+		
+	},
+	bannerCards: {
+		backgroundColor: "#009090",
+		height: "50vh",
+		width: "100%",
+		color: "white",
+		margin: "2%",
+		marginTop: "20%",
+		borderRadius: "2px",
+	},
+};
 const ReviewPage = () => {
 	const carouselItems = [
 		{ id: 1, text: "Card 1" },
@@ -14,23 +33,20 @@ const ReviewPage = () => {
 		{ id: 7, text: "Card 7" },
 	];
 
-	const carouselSettings = {
-		autoPlay: true,
-		infiniteLoop: true,
-		showStatus: false,
-		showThumbs: false,
-		interval: 3000, // Change this value to control the slide duration
-		centerMode: true,
-		centerSlidePercentage: 30,
-		selectedItem: 2, // Change this value to control which card is initially visible
-		onClickItem: (index) => {
-			// Handle the click on carousel item here (optional)
-			console.log(`Clicked on card ${index + 1}`);
-		},
+	const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+	const goToNextSlide = () => {
+		setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);
 	};
 
+	const goToPrevSlide = () => {
+		setCurrentImageIndex((prevIndex) => (prevIndex - 1 + carouselItems.length) % carouselItems.length);
+	};
+
+	const visibleItems = carouselItems.slice(currentImageIndex, currentImageIndex + 9); // Show 3 items at a time
+
 	return (
-		<div style={{ backgroundColor: "#f0f0f0" }}>
+		<Box className="carousel-container" sx={styles.main}>
 			<Typography
 				textAlign={"center"}
 				color={"#009090"}
@@ -41,42 +57,23 @@ const ReviewPage = () => {
 			>
 				Over 1000+ Reviews from Happy Customers
 			</Typography>
-			<Grid
-				container
-				justifyContent="center" // Centers the cards horizontally
-				spacing={2} // Adjust the spacing between cards
-			>
-				<Grid item xs={12} sm={12} md={6} margin="auto" >
-					<Carousel {...carouselSettings}>
-						{carouselItems.map((item) => (
-							<div key={item.id}>
-								<Card
-									sx={{
-										backgroundColor: "white",
-										border: "1px solid #ccc",
-										borderRadius: "8px",
-										boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-										height: "200px", // Adjust the height as needed
-										width: "200px",
-										marginBottom: "50px", // Add margin from the bottom
-									}}
-								>
-									<CardContent>
-										<Typography variant="h6" gutterBottom>
-											{item.text}
-										</Typography>
-										<Typography color="#000" fontWeight={"bold"}>
-											Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque quod culpa reprehenderit
-											cupiditate distinctio.
-										</Typography>
-									</CardContent>
-								</Card>
-							</div>
-						))}
-					</Carousel>
-				</Grid>
-			</Grid>
-		</div>
+			<Box className="carousel">
+				<Carousel itemsToShow={4} itemsToScroll={3}>
+					{visibleItems.map((item) => (
+						<Box key={item.id}>
+							<Card sx={styles.bannerCards}>
+								<CardContent>
+									<Typography sx={styles.bannerTitleStyle1}>
+										Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque quod culpa reprehenderit cupiditate
+										distinctio.Neque quod culpa reprehenderit cupiditate distinctio.
+									</Typography>
+								</CardContent>
+							</Card>
+						</Box>
+					))}
+				</Carousel>
+			</Box>
+		</Box>
 	);
 };
 
