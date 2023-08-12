@@ -10,11 +10,11 @@ const Ingredient = () => {
   return (
     <div>
       <IngredientHeading/>
-      <IngredientBanner/>
+      {/* <IngredientBanner/> */}
       <IngredientSourcing/>
       <IngredientSourcingProducts/>
       <IngredientSupplement/>
-      <IngredientProductImages/>
+      {/* <IngredientProductImages/> */}
     </div>
   )
 }

@@ -2,7 +2,8 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 const styles = {
 	main: {
 		paddingLeft: "6%",
@@ -31,7 +32,20 @@ const styles = {
 };
 const AboutPageWhoWeAre = () => {
 	const checked = true;
+	const [blogsData, setBlogsData] = useState([]);
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/about1");
+			console.log(response);
+			setBlogsData(response.data.about1);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
 
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
 	return (
 		<Grid
 			container
@@ -48,7 +62,7 @@ const AboutPageWhoWeAre = () => {
 			}}
 		>
 			<Box sx={{ textAlign: "center", width: "100%" }}>
-				<Fade in={checked === true} timeout={1000}>
+				{/* <Fade in={checked === true} timeout={1000}>
 					<Typography sx={styles.bannerTitleStyle1}>WHO ARE WE</Typography>
 				</Fade>
 				<Fade in={checked === true} timeout={1000}>
@@ -70,7 +84,31 @@ const AboutPageWhoWeAre = () => {
 
 
 					</Typography>
+				</Fade> */}
+				{blogsData.map((items)=>{
+					return(
+						<>
+						<Fade in={checked === true} timeout={1000}>
+					<Typography sx={styles.bannerTitleStyle1}>{items.heading2}</Typography>
 				</Fade>
+				<Fade in={checked === true} timeout={1000}>
+					<Typography sx={styles.bannerTitleStyle2}>
+						{items.content5}
+					</Typography>
+				</Fade>
+				<Fade in={checked === true} timeout={1000}>
+					<Typography sx={styles.bannerTitleStyle2}>
+						{items.content6}
+					</Typography>
+				</Fade>
+				<Fade in={checked === true} timeout={1000}>
+					<Typography sx={styles.bannerTitleStyle2}>
+						{items.content7}
+					</Typography>
+				</Fade>
+						</>
+					)
+				})}
 			</Box>
 		</Grid>
 	);

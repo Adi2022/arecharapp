@@ -1,4 +1,3 @@
-import React from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Fade from "@mui/material/Fade";
@@ -7,6 +6,8 @@ import nsf from "../assets/nsf.jpeg";
 import fssai from "../assets/fssai.jpeg";
 import kosher from "../assets/kosher.jpeg";
 import halal from "../assets/halal.jpeg";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 const styles = {
 	gridLeft: {
 		backgroundColor: "#fff",
@@ -93,10 +94,24 @@ const styles = {
 };
 
 const AboutPageCertifications = () => {
+	const [blogsData, setBlogsData] = useState([]);
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/about1");
+			console.log(response);
+			setBlogsData(response.data.about1);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
 	const checked = true;
 	return (
 		<div>
-			<Typography variant="h2" sx={styles.centerHeading}>
+			{/* <Typography variant="h2" sx={styles.centerHeading}>
 				CERTIFICATION AND RECOGNITIONS
 			</Typography>
 			<Grid container>
@@ -172,7 +187,85 @@ const AboutPageCertifications = () => {
 						</Typography>
 					</Fade>
 				</Grid>
+			</Grid> */}
+
+			{blogsData.map((items)=>{
+				return (
+					<>
+					<Typography variant="h2" sx={styles.centerHeading}>
+				{items.certificationHeading}
+			</Typography>
+
+			<Grid container>
+				<Grid item xs={12} md={4} sx={styles.gridLeft}>
+					<img src={items.photos1} style={styles.image} alt="image1" />
+					<Fade in={checked === true} timeout={1000}>
+						<Typography variant="h4" sx={styles.bannerTitleStyle1}>
+							{items.certiHead1}
+						</Typography>
+					</Fade>
+					<Fade in={checked === true} timeout={3000}>
+						<Typography variant="body1" style={styles.para}>
+						{items.certiContent1}
+						</Typography>
+					</Fade>
+				</Grid>
+				<Grid item xs={12} md={4} sx={styles.gridLeft}>
+					<img src={items.photos2} style={styles.image} alt="image1" />
+					<Fade in={checked === true} timeout={1000}>
+						<Typography variant="h4" sx={styles.bannerTitleStyle1}>
+						{items.certiHead2}
+						</Typography>
+					</Fade>
+					<Fade in={checked === true} timeout={3000}>
+						<Typography variant="body1" style={styles.para}>
+						{items.certiContent2}
+						</Typography>
+					</Fade>
+				</Grid>
+				<Grid item xs={12} md={4} sx={styles.gridLeft}>
+					<img src={items.photos3} style={styles.image} alt="image1" />
+					<Fade in={checked === true} timeout={1000}>
+						<Typography variant="h4" sx={styles.bannerTitleStyle1}>
+						{items.certiHead3}
+						</Typography>
+					</Fade>
+					<Fade in={checked === true} timeout={3000}>
+						<Typography variant="body1" style={styles.para}>
+						{items.certiContent3}
+						</Typography>
+					</Fade>
+				</Grid>
+				<Grid item xs={12} md={4} sx={styles.gridLeft}>
+					<img src={items.photos4} style={styles.image} alt="image1" />
+					<Fade in={checked === true} timeout={1000}>
+						<Typography variant="h4" sx={styles.bannerTitleStyle1}>
+						{items.certiHead4}
+						</Typography>
+					</Fade>
+					<Fade in={checked === true} timeout={3000}>
+						<Typography variant="body1" style={styles.para}>
+						{items.certiContent4}
+						</Typography>
+					</Fade>
+				</Grid>
+				<Grid item xs={12} md={4} sx={styles.gridCenter}>
+					<img src={items.photos5} style={styles.image} alt="image2" />
+					<Fade in={checked === true} timeout={1000}>
+						<Typography variant="h4" sx={styles.bannerTitleStyle1}>
+						{items.certiHead5}
+						</Typography>
+					</Fade>
+					<Fade in={checked === true} timeout={3000}>
+						<Typography variant="body1" style={styles.para}>
+						{items.certiContent5}
+						</Typography>
+					</Fade>
+				</Grid>
 			</Grid>
+					</>
+				)
+			})}
 		</div>
 	);
 };

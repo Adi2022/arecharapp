@@ -8,6 +8,7 @@ import { Paper, Button } from "@mui/material";
 import {useState} from 'react'
 import Carousel from "react-material-ui-carousel";
 import { Paper as CarouselPaper } from "@mui/material";
+import ModalComponent from "../Modal/ModalComponent";
 
 
 const carouselImages = [carousel1, carousel2, carousel3, carousel4];
@@ -16,8 +17,8 @@ const styles = {
   main: {
     position: "relative",
     marginTop:{
-      xs:"8.4rem",
-      md:"9rem"
+      xs:"36%",
+      md:"10%"
     }
   },
   callQueryButton: {
@@ -60,15 +61,8 @@ const styles = {
 };
 
 const HomeBanner = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  
 
   return (
     <Box sx={styles.main}>
@@ -79,23 +73,7 @@ const HomeBanner = () => {
           </CarouselPaper>
         ))}
       </Carousel>
-      <Box sx={styles.buttonContainer}>
-        <Button
-          sx={styles.callQueryButton}
-          onClick={handleOpenModal}
-        >
-          Call Query
-        </Button>
-      </Box>
-      <Modal open={isModalOpen} onClose={handleCloseModal} sx={styles.modal}>
-        <Box sx={styles.modalContent}>
-          <TextField label="Name" variant="outlined" fullWidth margin="normal" />
-          <TextField label="Email" variant="outlined" fullWidth margin="normal" />
-          <Button variant="contained" color="primary" fullWidth>
-            Submit
-          </Button>
-        </Box>
-      </Modal>
+      <ModalComponent/>
     </Box>
   );
 };

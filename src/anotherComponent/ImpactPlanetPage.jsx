@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import React,{useState,useEffect} from "react";
+import axios from 'axios'
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Fade from "@mui/material/Fade";
@@ -44,7 +46,20 @@ const styles = {
 };
 const ImpactPlanetPage = () => {
 	const checked = true;
+	const [impact2Data, setImpact2Data] = useState([]);
+	const fetchImpact2 = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/impact2");
+			console.log(response);
+			setImpact2Data(response.data.impact2);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
 
+	useEffect(() => {
+		fetchImpact2();
+	}, []);
 	return (
 		<Grid
 			container
@@ -60,34 +75,33 @@ const ImpactPlanetPage = () => {
 			}}
 		>
 			<Box sx={{ textAlign: "center", width: "100%" }}>
-				<Fade in={checked === true} timeout={1000}>
+				{impact2Data.map((items)=>{
+					return (
+						<>
+						 <Fade in={checked === true} timeout={1000}>
 					<Typography variant="h3" sx={styles.bannerTitleStyle2}>
-						The
+						{items.headings5.heading1}
+					</Typography>
+				</Fade>
+				<Fade in={checked === true} timeout={1000}>
+					<Typography variant="h3" sx={styles.bannerTitleStyle1}>
+					{items.headings5.heading2}
 					</Typography>
 				</Fade>
 
 				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle1}>
-						PLANET
+					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
+					{items.headings5.content2}
 					</Typography>
 				</Fade>
 				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
-						We made it our mission to bring health through food to as many people as possible Building on the unique
-						health &
-					</Typography>
-				</Fade>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
-						wellness positioning of our portfolio, and on our in-depth knowledge of local context, our ambition is to
-						grow our{" "}
-					</Typography>
-				</Fade>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
-						brands while having a positive impact on people’s eating and drinking
-					</Typography>
-				</Fade>
+				<img src={items.headings5.photos2} alt="Blog Banner" style={{ width: "100%" }} />
+			</Fade>
+						</>
+					)
+				})}
+
+
                 
 			</Box>
            

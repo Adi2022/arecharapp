@@ -1,33 +1,9 @@
-import React from "react";
-import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
-import blog1 from "../assets/blog1.jpg";
-import blog2 from "../assets/blog2.jpeg";
-import blog3 from "../assets/blog3.jpg";
-import blog4 from "../assets/blog4.jpg";
-import blog5 from "../assets/blog5.jpg";
-import blog6 from "../assets/blog12.jpg";
-import blog7 from "../assets/blog6.jpg";
-import blog8 from "../assets/blog7.jpg";
-import blog9 from "../assets/blog8.jpg";
-import blog10 from "../assets/blog9.jpg";
-import blog11 from "../assets/blog10.jpg";
-import blog12 from "../assets/blog11.jpg";
-import { styled } from "@mui/material/styles";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Grid, CardMedia, CardContent, Typography } from "@mui/material";
+import { useNavigate, Link } from "react-router-dom";
+import ModalComponent from "../Modal/ModalComponent";
 
-const blogsData = [
-	{ image: blog1, text: "Explore The Benefits Of Antioxid" },
-	{ image: blog2, text: "7 Ways To Stop Hair Fall For Fem" },
-	{ image: blog3, text: "6 Omega 3 Facts You Need To Know" },
-	{ image: blog4, text: "5 Hair Masks For Keratin Hair Tr" },
-	{ image: blog5, text: "10 Things You Need To Know About" },
-	{ image: blog6, text: "How to Improve Your Gut Health i" },
-	{ image: blog7, text: "Sea Buckthorn: Health Benefits," },
-	{ image: blog8, text: "Discovering The Potential of Ino" },
-	{ image: blog9, text: "Tips on How to Grow Hair Faster" },
-	{ image: blog10, text: "Discovering the Secrets of Vitam" },
-	{ image: blog11, text: "Gut-Brain Harmony: Cultivating M" },
-	{ image: blog12, text: "Unlock The Secret To Rapunzel-Li" },
-];
 const styles = {
 	bannerTitleStyle1: {
 		fontWeight: "bold",
@@ -57,25 +33,53 @@ const styles = {
 		color: "#000",
 		marginBottom: "20px",
 	},
+	truncatedContent: {
+		overflow: "hidden",
+		display: "-webkit-box",
+		WebkitBoxOrient: "vertical",
+		WebkitLineClamp: 2, // Adjust this to control the number of visible lines
+	},
 };
 const BlogPageDifferentBlogs = () => {
+	const navigate = useNavigate();
+	const [blogsData, setBlogsData] = useState([]);
+	const [selectedBlogId, setSelectedBlogId] = useState(null);
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/blog");
+			console.log(response);
+			setBlogsData(response.data.blogs);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+
+	const handleBlogs = (id) => {
+		navigate(`/blog/singleblog/${id}`);
+	};
+
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
 	return (
-		<Grid container spacing={2} marginBottom="6%" marginTop="4%" padding="4%" >
+		<Grid container spacing={2} marginBottom="6%" marginTop="4%" padding="4%">
 			{blogsData.map((blog, index) => (
-				<Grid item xs={12} sm={6} md={4} key={index}>
+				<Grid item xs={12} sm={6} md={4} key={index} onClick={() => handleBlogs(blog._id)}>
 					{/* <Card style={{border:"none",}}> */}
-						<CardMedia component="img" height="200"  image={blog.image} alt={blog.text} />
-						<CardContent>
-							<Typography sx={styles.bannerTitleStyle1}>{blog.text}</Typography>
-							<Typography sx={styles.bannerTitleStyle2}>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. A voluptatibus saepe dicta deserunt cupiditate
-								maiores sed excepturi. Illum, atque nemo, minima obcaecati modi commodi accusantium qui quae animi, est
-								voluptatum!
-							</Typography>
-						</CardContent>
+					<CardMedia component="img" height="200" image={blog.photos} />
+					<Typography sx={styles.bannerTitleStyle2}>{blog.date}</Typography>
+
+					<CardContent>
+						<Typography sx={styles.bannerTitleStyle1}>{blog.title}</Typography>
+
+						<Typography sx={{ ...styles.bannerTitleStyle2, ...styles.truncatedContent }}>
+							{blog.content.content1}
+						</Typography>{" "}
+					</CardContent>
 					{/* </Card> */}
 				</Grid>
 			))}
+			<ModalComponent/>
 		</Grid>
 	);
 };

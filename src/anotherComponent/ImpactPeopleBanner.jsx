@@ -1,14 +1,7 @@
-import React from "react";
-import people from "../assets/people-img.jpg";
-import { Box, Typography, Container,Grid,CardContent } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Fade from "@mui/material/Fade";
+import React,{useState,useEffect} from "react";
+import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
+import axios from 'axios'
 
-const blogsData = [
-	{ text: "Better People" },
-	{ text: "Better Workplace" },
-	
-];
 
 const styles = {
 	bannerTitleStyle1: {
@@ -20,7 +13,8 @@ const styles = {
 		color: "#009090",
 		marginBottom: "20px",
 		lineHeight: "43px",
-		letterSpacing: "-2px",
+        letterSpacing:"-2px",
+		
 
 		// Add responsive styles
 		"@media (max-width: 600px)": {
@@ -37,35 +31,47 @@ const styles = {
 		fontSize: "16px",
 		fontFamily: "'Montserrat', sans-serif",
 		lineHeight:"1.65",
-		marginBottom:"20%"
+		marginBottom: "20px",
 	},
 };
 const ImpactPeopleBanner = () => {
-	const checked = true;
+	const [impact2Data, setImpact2Data] = useState([]);
 
+	const fetchImpact2 = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/impact2");
+			console.log(response);
+			setImpact2Data(response.data.impact2);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchImpact2();
+	}, []);
 	return (
-		<Box py={4} bgcolor="white" color="black">
-			<Fade in={checked === true} timeout={1000}>
-				<img src={people} alt="Blog Banner" style={{ width: "100%",  }} />
-			</Fade>
-            <Box py={4} bgcolor="white" color="black">
-			
-			<Grid container spacing={2} marginBottom="6%" marginTop="4%" padding="4%">
-				{blogsData.map((blog, index) => (
-					<Grid item xs={12} sm={6} md={6} key={index}>
-						<CardContent>
-							<Typography sx={styles.bannerTitleStyle1}>{blog.text}</Typography>
-							<Typography sx={styles.bannerTitleStyle2}>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. A voluptatibus saepe dicta deserunt cupiditate
-								maiores sed excepturi. Illum, atque nemo, minima obcaecati modi commodi accusantium qui quae animi, est
-								voluptatum!
-							</Typography>
-						</CardContent>
+		<Grid container spacing={2} marginBottom="6%" marginTop="4%" padding="4%">
+			{impact2Data.map((blog, index) => (
+				<Grid container item xs={12} sm={6} md={12} key={index}>
+					
+					<Grid item xs={12} sm={6} md={6} >
+					<Typography sx={styles.bannerTitleStyle1}>{blog.head3.heading}</Typography>
+						<Typography sx={styles.bannerTitleStyle2}>
+						{blog.head3.content}
+						</Typography>
+					
 					</Grid>
-				))}
-			</Grid>
-		</Box>
-		</Box>
+					<Grid item xs={12} sm={6} md={6} >
+					<Typography sx={styles.bannerTitleStyle1}>{blog.head4.heading}</Typography>
+						<Typography sx={styles.bannerTitleStyle2}>
+						{blog.head4.content}
+						</Typography>
+						</Grid>
+					
+				</Grid>
+			))}
+		</Grid>
 	);
 };
 

@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import ModalComponent from '../Modal/ModalComponent'
 const styles = {
 	main: {
 		backgroundColor: "#fff",
@@ -19,8 +20,13 @@ const styles = {
 		textAlign: "center",
 		fontSize: "60px",
 		fontFamily: "'Montserrat', sans-serif",
-		marginTop: "20%",
+
 		textTransform: "uppercase",
+		marginTop: {
+			md: "15%",
+			xs: "35%",
+		},
+		marginBottom: "4%",
 	},
 	bannerTitleStyle2: {
 		color: "#009090",
@@ -29,20 +35,34 @@ const styles = {
 		fontSize: "60px",
 		fontFamily: "Montserrat, sans-serif",
 		textTransform: "uppercase",
-        marginBottom:"4%"
+		marginBottom: "4%",
 	},
-    bannerTitleStyle3: {
+	bannerTitleStyle3: {
 		color: "#000",
 		fontWeight: 300,
 		textAlign: "center",
 		fontSize: "16px",
 		fontFamily: "'Montserrat', sans-serif",
-		lineHeight:"1.65"
-		
+		lineHeight: "1.65",
 	},
 };
+
 const ImpactHeading = () => {
 	const checked = true;
+
+	const [impactData, setImpactData] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get("http://localhost:3000/impact1") // Replace with your API endpoint
+			.then((response) => {
+				console.log(response);
+				setImpactData(response.data.impact1);
+			})
+			.catch((error) => {
+				console.error("Error fetching data:", error);
+			});
+	}, []);
 	return (
 		<Grid
 			container
@@ -58,32 +78,29 @@ const ImpactHeading = () => {
 			}}
 		>
 			<Box sx={{ textAlign: "center", width: "100%" }}>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle1}>
-						We don’t just make people healthier.
-					</Typography>
-				</Fade>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle2}>
-						We make the planet healthier too.
-					</Typography>
-				</Fade>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
-						Arechar Nutra remains committed to providing preventive and curative medicines, health supplements of global{" "}
-					</Typography>
-				</Fade>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
-						quality standards to every Indian. With a purpose of improving the global nutritional profile of the
-						product,
-					</Typography>
-				</Fade>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
-						target values are defined on all key nutrients that are relevant in each category.
-					</Typography>
-				</Fade>
+				{impactData.map((items) => {
+					return (
+						<>
+							<Fade in={checked === true} timeout={1000}>
+								<Typography variant="h3" sx={styles.bannerTitleStyle1}>
+									{items.heading1}.
+								</Typography>
+							</Fade>
+
+							<Fade in={checked === true} timeout={1000}>
+								<Typography variant="h3" sx={styles.bannerTitleStyle3}>
+									{items.content1}
+								</Typography>
+							</Fade>
+
+							<Fade in={checked === true} timeout={1000}>
+								<img src={items.photos1} alt="Blog Banner" style={{ width: "100%" }} />
+							</Fade>
+							<ModalComponent/>
+						</>
+					);
+				})}
+				
 			</Box>
 		</Grid>
 	);

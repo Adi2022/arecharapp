@@ -1,16 +1,13 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Box, Typography } from "@mui/material";
-import product1 from "../assets/sourcing-1.png";
-import product2 from "../assets/sourcing-2.png";
-import product3 from "../assets/sourcing-3.png";
-
 const styles = {
 	main: {
 		backgroundColor: "#fff",
 		paddingLeft: "3%",
 		paddingRight: "3%",
-		paddingBottom: "4.6%",
-		paddingTop:"2%"
+		
+		
 	},
 
 	bannerTitleStyle1: {
@@ -41,7 +38,21 @@ const styles = {
 	},
 };
 const IngredientSourcingProducts = () => {
+	const [blogsData, setBlogsData] = useState([]);
+
 	const checked = true;
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/ingredient");
+			console.log(response);
+			setBlogsData(response.data.blogs);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
 	return (
 		<Box
 			sx={styles.main}
@@ -50,27 +61,36 @@ const IngredientSourcingProducts = () => {
 			alignItems="center"
 			flexDirection={{ xs: "column", sm: "row" }}
 		>
-			<Box display="flex" flexDirection="row" alignItems="center">
-				<img src={product1} alt="Product 1" style={{ marginBottom: "20px", width: "40%" }} />
-				<Typography sx={styles.bannerTitleStyle3}>
-					<strong>All natural</strong> The all-natural ingredients reflect our pure approach to our work. They also
-					ensure the best of health.
-				</Typography>
-			</Box>
-			<Box display="flex" flexDirection="row" alignItems="center">
-				<img src={product2} alt="Product 2" style={{ marginBottom: "20px", width: "40%" }} />
-				<Typography sx={styles.bannerTitleStyle3}>
-					<strong>Responsible sourcing</strong> We source our ingredients with a practice that puts the least strain on
-					the environment and the health of our workers.
-				</Typography>
-			</Box>
-			<Box display="flex" flexDirection="row" alignItems="center">
-				<img src={product3} alt="Product 3" style={{ marginBottom: "20px", width: "40%" }} />
-				<Typography sx={styles.bannerTitleStyle3}>
-					<strong>Sustainable</strong> Right from getting what we need to producing. From Packaging to distributing, we
-					ensure that our business practice is sustainable.
-				</Typography>
-			</Box>
+			{blogsData.map((items) => {
+				return (
+					<>
+						<Box display="flex" flexDirection="row" alignItems="center">
+							<img
+								src={items.source.sourcingTypes.image1}
+								alt="Product 1"
+								style={{ marginBottom: "20px", width: "40%" }}
+							/>
+							<Typography sx={styles.bannerTitleStyle3}>{items.source.sourcingTypes.content1}</Typography>
+						</Box>
+						<Box display="flex" flexDirection="row" alignItems="center">
+							<img
+								src={items.source.sourcingTypes.image2}
+								alt="Product 1"
+								style={{ marginBottom: "20px", width: "40%" }}
+							/>
+							<Typography sx={styles.bannerTitleStyle3}>{items.source.sourcingTypes.content2}</Typography>
+						</Box>
+						<Box display="flex" flexDirection="row" alignItems="center">
+							<img
+								src={items.source.sourcingTypes.image3}
+								alt="Product 1"
+								style={{ marginBottom: "20px", width: "40%" }}
+							/>
+							<Typography sx={styles.bannerTitleStyle3}>{items.source.sourcingTypes.content3}</Typography>
+						</Box>
+					</>
+				);
+			})}
 		</Box>
 	);
 };

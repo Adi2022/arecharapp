@@ -15,6 +15,7 @@ import GoToTopPage from '../GoToTopPage'
 import Login from '../Login/Login'
 import Register from '../Login/Register'
 import ForgotPassword from '../Login/ForgotPassword'
+import SingleBlogData from '../anotherComponent/SingleBlogData'
 
 const Routing = () => {
   return (
@@ -28,6 +29,7 @@ const Routing = () => {
         <Route  path="/shop" element={<Shop/>}/>
         <Route  path="/about" element={<About/>}/>
         <Route  path="/blog" element={<Blog/>}/>
+        <Route path="/blog/singleblog/:id" element={<SingleBlogData />} />
         <Route  path="/impact" element={<Impact/>}/>
         <Route   path="/productVitagoli" element={<Products/>}/>
         <Route  path="/productVitagoliPre" element={<ProductVitagoliPre/>}/>
