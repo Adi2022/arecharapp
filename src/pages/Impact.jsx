@@ -11,7 +11,7 @@ const Impact = () => {
   return (
     <div>
       <ImpactHeading/>
-      <ImpactBanner/>
+      {/* <ImpactBanner/> */}
       <ImpactCompanyPromises/>
       <ImpactPlanetPage/>
       <ImpactPlanetBanner/>

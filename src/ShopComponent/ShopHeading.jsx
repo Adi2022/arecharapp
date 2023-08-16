@@ -7,8 +7,7 @@ import Box from "@mui/material/Box";
 const styles = {
 	main: {
 		backgroundColor: "#fff",
-		paddingLeft: "6%",
-		paddingRight: "6%",
+		
 
 		paddingBottom: "4.6%",
 	},
@@ -19,8 +18,12 @@ const styles = {
 		textAlign: "center",
 		fontSize: "60px",
 		fontFamily: "'Montserrat', sans-serif",
-		marginTop: "20%",
+		
 		textTransform: "uppercase",
+		marginTop: {
+			xs:"60%",
+			md:"20%"
+		}
 	},
 	bannerTitleStyle2: {
 		color: "#009090",

@@ -123,7 +123,7 @@ const Header = () => {
 						{/* Left Section */}
 						<Box sx={{ display: "flex", alignItems: "center" }}>
 							{pages.map((page) => (
-								<React.Fragment key={page.title}>
+								<ListItem key={page.title}>
 									{page.title === "Products" ? (
 										<React.Fragment>
 											<Button
@@ -133,7 +133,7 @@ const Header = () => {
 													textDecoration: selectedPage === page.path ? "underline" : "none",
 													fontWeight: selectedPage === page.path ? "bold" : "normal",
 												}}
-												onMouseEnter={handleProductsMenuOpen}
+												onMouseEnter={(event) => handleProductsMenuOpen(event, page.path)}
 												onMouseLeave={handleProductsMenuClose}
 											>
 												<Typography
@@ -152,25 +152,29 @@ const Header = () => {
 									onClose={handleProductsMenuClose}
 									onMouseEnter={handleProductsMenuOpen} // Keep the menu open when hovering over it
 									onMouseLeave={handleProductsMenuClose} // Close the menu when not hovering
-									anchorOrigin={{ vertical: "top" }} // Adjust menu position
-									transformOrigin={{ vertical: "top",  }} // Adjust menu position
+									anchorOrigin={{
+									
+									  }}
+									  transformOrigin={{
+										
+									  }}
 									style={{cursor:"pointer"}}
 								>
 									<MenuItem
-										style={styles.main}
+										sx={styles.main}
 										component={NavLink}
 										to="/productVitagoli"
 										onClick={handleProductsMenuClose}
 									>
-										Vitagoli Vitamin Gummies Hair, Skin and Nails
+										<Typography fontSize="12px" >Vitagoli Vitamin Gummies Hair, Skin and Nails</Typography>
 									</MenuItem>
 									<MenuItem
-										style={styles.main}
+										sx={styles.main}
 										component={NavLink}
 										to="/productVitagoliPre"
 										onClick={handleProductsMenuClose}
 									>
-										Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA
+										<Typography fontSize="12px">Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA</Typography>
 									</MenuItem>
 								</Menu>
 										</React.Fragment>
@@ -197,7 +201,7 @@ const Header = () => {
 											</Typography>
 										</Button>
 									)}
-								</React.Fragment>
+								</ListItem>
 							))}
 						</Box>
 
@@ -236,18 +240,82 @@ const Header = () => {
 				<Drawer anchor="left" open={drawerOpen} onClose={closeDrawer}>
 					<List>
 						{pages.map((page) => (
-							<ListItem
-								key={page.title}
-								onClick={() => handlePageClick(page.path)}
-								component={NavLink}
-								to={page.path}
-								sx={{
-									color: selectedPage === page.path ? "#FF7276" : "inherit",
-								}}
-							>
-								<ListItemText primary={page.title} />
-							</ListItem>
-						))}
+								<ListItem key={page.title}>
+									{page.title === "Products" ? (
+										<React.Fragment>
+											<Button
+												color="inherit"
+												sx={{
+													mx: 1,
+													textDecoration: selectedPage === page.path ? "underline" : "none",
+													fontWeight: selectedPage === page.path ? "bold" : "normal",
+												}}
+												onMouseEnter={handleProductsMenuOpen}
+												onMouseLeave={handleProductsMenuClose}
+											>
+												<Typography
+													variant="subtitle1"
+													sx={{
+														color: selectedPage === page.path ? "#009090" : "inherit",
+														fontWeight: selectedPage === page.path ? "bold" : "normal",
+													}}
+												>
+													{page.title}
+												</Typography>
+											</Button>
+											<Menu
+									anchorEl={anchorEl}
+									open={productsMenuOpen}
+									onClose={handleProductsMenuClose}
+									onMouseEnter={handleProductsMenuOpen} // Keep the menu open when hovering over it
+									onMouseLeave={handleProductsMenuClose} // Close the menu when not hovering
+									anchorOrigin={{ vertical: "left" }} // Adjust menu position
+									transformOrigin={{ vertical: "left",  }} // Adjust menu position
+									style={{cursor:"pointer",width:"60%"}}
+								>
+									<MenuItem
+										sx={styles.main}
+										component={NavLink}
+										to="/productVitagoli"
+										onClick={handleProductsMenuClose}
+									>
+										<Typography fontSize="12px" >Vitagoli Vitamin Gummies Hair, Skin and Nails</Typography>
+									</MenuItem>
+									<MenuItem
+										sx={styles.main}
+										component={NavLink}
+										to="/productVitagoliPre"
+										onClick={handleProductsMenuClose}
+									>
+										<Typography fontSize="12px">Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA</Typography>
+									</MenuItem>
+								</Menu>
+										</React.Fragment>
+									) : (
+										<Button
+											color="inherit"
+											component={NavLink}
+											to={page.path}
+											sx={{
+												mx: 1,
+												textDecoration: selectedPage === page.path ? "underline" : "none",
+												fontWeight: selectedPage === page.path ? "bold" : "normal",
+											}}
+											onClick={() => handlePageClick(page.path)}
+										>
+											<Typography
+												variant="subtitle1"
+												sx={{
+													color: selectedPage === page.path ? "#009090" : "inherit",
+													fontWeight: selectedPage === page.path ? "bold" : "normal",
+												}}
+											>
+												{page.title}
+											</Typography>
+										</Button>
+									)}
+								</ListItem>
+							))}
 						<Box sx={{ display: "flex", alignItems: "center" }}>
 							<Typography variant="h6" component="div">
 								<img src={logo} alt="logo" style={{ width: "100px" }} />

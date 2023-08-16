@@ -149,19 +149,41 @@ export default function Register() {
         return 
       }
 
+      try {
+        const res = await fetch("http://localhost:3000/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            firstName,
+            lastName,
+            cPassword,
+            mobile
 
+          }),
+        });
+        const data = await res.json();
+        console.log(data)
+        if (data.error) {
+          toast.error(<strong style={{color:"red"}}>{data.error}</strong>);
+        } else {
+          toast.success("Registered successfully");
+          setTimeout(() => {
+            navigate("/login");
+          }, 1000);
+        }
+      } catch (error) {
+        console.log(error);
+      }
       
        
-        // Validate email and password
-       
-        // if noo email is entered
-         
+        
        
        
-        toast.success("Registered Successfully")
-        setTimeout(() => {
-            navigate("/");
-          }, 1000);
+       
       };
 
 	return (

@@ -27,6 +27,15 @@ import ProductVitaUsingPersons from "./ProductVitaUsingPersons";
 const productData = [{ image: P2 }, { image: P3 }, { image: P4 }, { image: P5 }];
 const productData2 = [{ images: p1 }, { images: p2 }, { images: p3 }, { images: p4 }];
 
+const styles={
+	main:{
+		marginTop:{
+			md:"10%",
+			xs:"30%"
+		}
+	}
+}
+
 const ProductVitagoli = () => {
 	const [openModal, setOpenModal] = useState(false);
 
@@ -63,7 +72,7 @@ const ProductVitagoli = () => {
 
 	return (
 		<div>
-			<Grid container spacing={2} p={4} style={{ height: "100%", marginTop: "10%" }}>
+			<Grid container spacing={2} p={4} sx={styles.main}>
 				{/* Left Grid */}
 				<Grid item xs={12} md={6}>
 					<div style={{ position: "relative" }}>

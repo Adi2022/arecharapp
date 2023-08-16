@@ -21,7 +21,7 @@ const IngredientProductImages = () => {
   return (
     <Box py={4}>
       <CenteredContainer>
-        <img src={blogbanner} alt="Blog Banner" style={{ width: "100%", margin: "auto" ,marginBottom:"4%"}} />
+        <img src={blogbanner} alt="Blog Banner" style={{ width: "100%"}} />
       </CenteredContainer>
     </Box>
   );

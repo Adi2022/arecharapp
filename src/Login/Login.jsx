@@ -15,6 +15,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate,NavLink } from "react-router-dom";
+import axios from 'axios';
 const styles = {
 	heading: {
 		backgroundColor: "#72B280",
@@ -124,10 +125,22 @@ export default function Login() {
           return 
         }
        
-        toast.success("Registered Successfully")
-        setTimeout(() => {
-            navigate("/");
-          }, 1000);
+		try {
+			const response = await axios.post('http://localhost:3000/login', {
+			  email,
+			  password,
+			});
+			if (response.status === 200) {
+				toast.success("Login successful");
+				navigate('/');
+			} else {
+				// Handle incorrect login credentials
+				toast.error("Incorrect email or password");
+			}
+			
+		  } catch (error) {
+			console.log(error);
+		  }
       };
 
 	return (

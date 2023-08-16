@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Card, CardContent, Typography, Box,Grid } from "@mui/material";
+import axios from "axios";
+
+const styles={
+
+  main:{
+    backgroundColor:"#f4f4f4",
+    height:"40vh"
+
+  },
+  card:{
+    backgroundColor:"#009090",
+    
+  },
+  content:{
+    color:'white',
+  }
+}
 
 const FaqsPage = () => {
-  const carouselItems = [
-    { id: 1, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
-    { id: 2, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
-    { id: 3, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
-    { id: 4, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
-    { id: 5, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
-    { id: 6, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
-    { id: 7, text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit." },
-  ];
+  const [blogsData, setBlogsData] = useState([]);
+
+	const checked = true;
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/home");
+			console.log(response);
+			setBlogsData(response.data.impact1); // Update this line
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
+ 
 
   const isSmallScreen = window.innerWidth <= 600; // Adjust breakpoint as needed
   const visibleCards = isSmallScreen ? 1 : 3;
@@ -33,15 +58,14 @@ const FaqsPage = () => {
   };
 
   return (
-    <Box>
+    <Box sx={styles.main}>
       <Box
-        sx={{
-          background: "linear-gradient(to right, #e1e1e1, #000)",
-          margin: "auto",
-          marginTop: "2%",
-        }}
+        
       />
-      <Typography
+      {blogsData.map((items)=>{
+        return (
+          <>
+          <Typography
         textAlign={"center"}
         color={"#009090"}
         fontWeight={"bold"}
@@ -49,31 +73,40 @@ const FaqsPage = () => {
         marginTop={"3%"}
         marginBottom={"3%"}
       >
-        Some FAQs related to Vitagoli
+        {items.faqs.faqsHeading}
       </Typography>
-      <Carousel {...carouselSettings}>
-        {carouselItems.map((item) => (
-          <div
-            key={item.id}
-            style={{
-              margin: "0 10px",
-              marginBottom: "20px",
-            }}
-          >
-            <Card>
-              <CardContent>
-                <Typography color="#000" fontWeight={"bold"} textAlign={"left"}>
-                  {item.text}
-                </Typography>
-                <br />
-                <Typography color="#000" textAlign={"left"}>
-                  Ans - {item.text}
-                </Typography>
-              </CardContent>
-            </Card>
-          </div>
-        ))}
-      </Carousel>
+
+     <Carousel {...carouselSettings}>
+              {/* Loop through the FAQ questions and answers */}
+              {Object.keys(items.faqs.faqsQA).map((questionKey) => (
+                <Grid
+                  style={{
+                    margin: "0 10px",
+                    marginBottom: "40px",
+                  }}
+                  key={questionKey}
+                  item
+                  xs={4}
+                  sm={4}
+                  md={12}
+                >
+                  <Card sx={styles.card}>
+                    <CardContent sx={styles.content}>
+                      <Typography fontWeight={"bold"} textAlign={"left"}>
+                        {items.faqs.faqsQA[questionKey]}
+                      </Typography>
+                      <br />
+                      <Typography textAlign={"left"}>
+                        Ans - Answers
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Carousel>
+          </>
+        )
+      })}
       <Box
         sx={{
           width: "40%",

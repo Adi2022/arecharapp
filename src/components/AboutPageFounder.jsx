@@ -1,7 +1,6 @@
-import React from 'react';
 import { styled } from '@mui/material/styles';
-import Founder from '../assets/ruchika-team-icon.jpg';
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // Styled components to apply custom styles
 const Container = styled('div')({
   display: 'flex',
@@ -26,10 +25,30 @@ const Name = styled('div')({
 });
 
 const AboutPageFounder = () => {
+  const [blogsData, setBlogsData] = useState([]);
+  const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/about1");
+			console.log(response);
+			setBlogsData(response.data.about1);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
   return (
     <Container>
-      <Image src={Founder} alt="Founder" />
-      <Name>Ruchika Rajbans</Name>
+     {blogsData.map((items)=>{
+      return (
+        <>
+         <Image src={items.founderPhotos} alt="Founder" />
+      <Name>{items.founderName}</Name>
+        </>
+      )
+     })}
     </Container>
   );
 };

@@ -38,7 +38,7 @@ const styles = {
 	formTextField: {
 		"& .MuiInputBase-root": {
 			color: "#fff",
-			border: "1px solid #fff",
+			border: "2px solid #fff",
 		},
 	},
 	heading2: {
@@ -110,7 +110,7 @@ export default function ForgotPassword() {
 
 		toast.success("Registered Successfully");
 		setTimeout(() => {
-			navigate("/");
+			navigate("/login");
 		}, 1000);
 	};
 
@@ -161,8 +161,8 @@ export default function ForgotPassword() {
 						type="submit"
 						onClick={PostData}
 						style={{ backgroundColor: "#72B280", color: "#fff", fontWeight: 700 }}
-						sx={{ mt: 3, mb: 2 }}
-						padding="%"
+						sx={{ mt: 3, mb: 2 ,p:2}}
+						
 					>
 						Submit
 					</Button>

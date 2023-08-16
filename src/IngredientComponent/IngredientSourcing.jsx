@@ -3,14 +3,12 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 const styles = {
 	main: {
 		backgroundColor: "#fff",
-		paddingLeft: "6%",
-		paddingRight: "6%",
-
-		paddingBottom: "4.6%",
+	
 	},
 
 	bannerTitleStyle1: {
@@ -21,7 +19,8 @@ const styles = {
 		fontFamily: "'Montserrat', sans-serif",
 		marginBottom: "4%",
 		textTransform: "uppercase",
-		lineHeight:"50px"
+		lineHeight: "50px",
+		marginTop:"4%"
 	},
 	bannerTitleStyle2: {
 		color: "#009090",
@@ -41,38 +40,44 @@ const styles = {
 	},
 };
 const IngredientSourcing = () => {
+	const [blogsData, setBlogsData] = useState([]);
+
 	const checked = true;
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/ingredient");
+			console.log(response);
+			setBlogsData(response.data.blogs);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
 	return (
 		<Grid
 			container
 			style={styles.main}
-			sx={{
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-				height: "",
-				backgroundSize: "cover",
-				color: "white",
-				opacity: "1",
-			}}
+			
 		>
 			<Box sx={{ textAlign: "center", width: "100%" }}>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle1}>
-						Sourcing Ingridients
-					</Typography>
-				</Fade>
-
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
-						Responsibly sourced, our natural ingredients go a long way in ensuring health for women of all{" "}
-					</Typography>
-				</Fade>
-				<Fade in={checked === true} timeout={1000}>
-					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
-						ages.{" "}
-					</Typography>
-				</Fade>
+				{blogsData.map((items) => {
+					return (
+						<>
+							<Fade in={checked === true} timeout={1000}>
+								<Typography variant="h3" sx={styles.bannerTitleStyle1}>
+									{items.source.heading2}
+								</Typography>
+							</Fade>
+							<Fade in={checked === true} timeout={1000}>
+								<Typography variant="h3" sx={styles.bannerTitleStyle3}>
+									{items.source.description2}
+								</Typography>
+							</Fade>
+						</>
+					);
+				})}
 			</Box>
 		</Grid>
 	);
