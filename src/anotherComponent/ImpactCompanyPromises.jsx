@@ -17,7 +17,7 @@ const styles = {
 		
 
 		// Add responsive styles
-		"@media (max-width: 600px)": {
+		"@media (max-width: 767px)": {
 			fontSize: "30px",
 			letterSpacing: "0px",
 			fontWeight: "bold",
@@ -51,9 +51,9 @@ const ImpactCompanyPromises = () => {
 		fetchImpact2();
 	}, []);
 	return (
-		<Grid container spacing={2} marginBottom="6%" marginTop="4%" padding="4%">
+		<Grid container spacing={2} alignItems={"center"}>
 			{impact2Data.map((blog, index) => (
-				<Grid container item xs={12} sm={6} md={12} key={index}>
+				<Grid container item xs={12} sm={12} md={12} key={index}>
 					
 					<Grid item xs={12} sm={6} md={6} >
 					<Typography sx={styles.bannerTitleStyle1}>{blog.headings1.heading}</Typography>

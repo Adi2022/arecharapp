@@ -16,8 +16,7 @@ const CenteredContainer = styled(Container)({
 });
 const styles = {
 	main: {
-		paddingLeft: "10%",
-		paddingRight: "10%",
+		
 		paddingBottom: "4.6%",
 		paddingTop: "2.6%",
 	},

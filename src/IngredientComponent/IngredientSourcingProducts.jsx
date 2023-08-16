@@ -4,8 +4,6 @@ import { Box, Typography } from "@mui/material";
 const styles = {
 	main: {
 		backgroundColor: "#fff",
-		paddingLeft: "3%",
-		paddingRight: "3%",
 		
 		
 	},

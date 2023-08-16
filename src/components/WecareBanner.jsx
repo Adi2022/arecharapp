@@ -1,15 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import Fade from "@mui/material/Fade";
-import DirectionsRunOutlinedIcon from "@mui/icons-material/DirectionsRunOutlined";
-import MedicalInformationOutlinedIcon from "@mui/icons-material/MedicalInformationOutlined";
-import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
-import LocalHospitalOutlinedIcon from "@mui/icons-material/LocalHospitalOutlined";
-
+import axios from "axios";
 const styles = {
   main: {
     backgroundColor: "#000",
@@ -66,22 +60,48 @@ const styles = {
 };
 
 const WecareBanner = () => {
-  const checked = true;
+
+	const [blogsData, setBlogsData] = useState([]);
+
+	const checked = true;
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/home");
+			console.log(response);
+			setBlogsData(response.data.impact1); // Update this line
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
   return (
-    <Grid container style={styles.main}>
+    <Grid container sx={styles.main}>
       <Box sx={{ textAlign: "center", width: "100%" }}>
-        <Fade in={checked === true} timeout={1000}>
+      
+        {/* Four icons in a flex container */}
+       
+        {blogsData.map((items)=>{
+          return (
+            <>
+              <Fade in={checked === true} timeout={1000}>
           <Typography variant="h3" sx={styles.bannerTitleStyle1}>
-            Because we care for you and the environment
+           {items.homeCareHeading.subHeading}
           </Typography>
         </Fade>
-        {/* Four icons in a flex container */}
         <Box sx={styles.iconsContainer}>
-          <DirectionsRunOutlinedIcon sx={styles.icon} />
-          <MedicalInformationOutlinedIcon sx={styles.icon} />
-          <SpaOutlinedIcon sx={styles.icon} />
-          <LocalHospitalOutlinedIcon sx={styles.icon} />
+         <img src= {items.homeCareHeading.photos13}/>
+         <img src= {items.homeCareHeading.photos14}/>
+         <img src= {items.homeCareHeading.photos15}/>
+         <img src= {items.homeCareHeading.photos16}/>
+         <img src= {items.homeCareHeading.photos17}/>
+         <img src= {items.homeCareHeading.photos18}/>
         </Box>
+            </>
+          )
+        })}
       </Box>
     </Grid>
   );

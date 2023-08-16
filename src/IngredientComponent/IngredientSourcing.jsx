@@ -8,10 +8,7 @@ import axios from "axios";
 const styles = {
 	main: {
 		backgroundColor: "#fff",
-		paddingLeft: "6%",
-		paddingRight: "6%",
-
-		paddingBottom: "4.6%",
+	
 	},
 
 	bannerTitleStyle1: {
@@ -62,15 +59,7 @@ const IngredientSourcing = () => {
 		<Grid
 			container
 			style={styles.main}
-			sx={{
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-				height: "",
-				backgroundSize: "cover",
-				color: "white",
-				opacity: "1",
-			}}
+			
 		>
 			<Box sx={{ textAlign: "center", width: "100%" }}>
 				{blogsData.map((items) => {

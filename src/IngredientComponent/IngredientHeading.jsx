@@ -15,8 +15,6 @@ const styles = {
 		fontSize: "60px",
 		fontFamily: "'Montserrat', sans-serif",
 		textTransform: "uppercase",
-		paddingLeft: "10%",
-		paddingRight: "10%",
 		marginTop: {
 			md: "15%",
 			xs: "40%",
@@ -30,8 +28,6 @@ const styles = {
 		fontFamily: "Montserrat, sans-serif",
 		textTransform: "uppercase",
 		lineHeight: "1.65",
-		paddingLeft: "10%",
-		paddingRight: "10%",
 	},
 	bannerTitleStyle3: {
 		color: "#000",
@@ -42,8 +38,7 @@ const styles = {
 		lineHeight: "1.65",
 		marginTop:"3%",
 		marginBottom:"3%",
-		paddingLeft: "10%",
-		paddingRight: "10%",
+		
 	},
 };
 const IngredientHeading = () => {
@@ -71,7 +66,7 @@ const IngredientHeading = () => {
 							<Typography sx={styles.bannerTitleStyle1}>{items.heading1}</Typography>
 						</Fade>
 						<Fade in={checked === true} timeout={1000}>
-							<Typography sx={styles.bannerTitleStyle3} style={{ marginTop: "2%" }}>
+							<Typography sx={styles.bannerTitleStyle3}>
 								{items.description1}
 							</Typography>
 						</Fade>

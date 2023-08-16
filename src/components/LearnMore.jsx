@@ -1,20 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import videos from "../assets/child.jpg";
 import Fade from "@mui/material/Fade";
 import Grow from "@mui/material/Grow";
-import AboutImage from "../assets/logo.png";
 import { Button } from "@mui/material";
-
+import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 const styles = {
-
-
   banner: {
     backgroundColor: "rgb(255,246,219)",
-    
   },
-
   bannerTitleStyle1: {
     paddingLeft: "6%",
     paddingRight: "6%",
@@ -38,10 +33,10 @@ const styles = {
 
 
   aboutImage: {
-    width: "30%",
+    width: "15%",
     paddingLeft: "6%",
     paddingRight: "6%",
-   
+   marginTop:"5%"
   },
 
   contact: {
@@ -57,7 +52,8 @@ const styles = {
   },
   paragraph: {
     letterSpacing: "normal",
-    marginBottom:"2%",
+    marginBottom:"4%",
+    marginTop:"4%",
     paddingLeft: "6%",
     paddingRight: "6%",
     color: "#fff",
@@ -80,34 +76,62 @@ paddingLeft: "6%",
 paddingRight: "6%",
 marginLeft: "6%",
 marginBottom:"2%",
+"&:hover": {
+  backgroundColor: "#000",
+  color:'#fff'
+},
+
 
   }
 };
 
 
 const LearnMore = () => {
-  const checked = true;
+  const [blogsData, setBlogsData] = useState([]);
+  const navigate=useNavigate()
+	const checked = true;
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/home");
+			console.log(response);
+			setBlogsData(response.data.impact1); // Update this line
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+
+  const handleLearnMore=()=>{
+   navigate('/about')
+  }
+
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
   return (
     <Grid container >
-     
-      <Grid item xs={12} md={6} sx={styles.gridLeft} style={{backgroundColor:"#009090"}}>
-        <img src={AboutImage} style={styles.aboutImage} alt="img1" />
+      {blogsData.map((items)=>{
+        return (
+          <>
+           <Grid item xs={12} md={6} sx={styles.gridLeft} style={{backgroundColor:"#009090"}}>
+        <img src={items.company.logo} style={styles.aboutImage} alt="img1" />
       
           <Typography variant="body1" sx={styles.paragraph}>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-            erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing
+           {items.company.companyContent}
           </Typography>
          
          
-         <Button sx={styles.learnbutton}>LEARN MORE</Button>
+         <Button sx={styles.learnbutton} onClick={handleLearnMore}>Know More</Button>
 
       </Grid>
+
       <Grid item xs={12} md={6}>
         <Grow in={checked} timeout={1500} direction="left">
-          <img src={videos} alt="homeBanner" style={styles.contact} />
+          <img src={items.company.kidsPhotos} alt="homeBanner" style={styles.contact} />
         </Grow>
       </Grid>
+          </>
+        )
+      })}
     
     </Grid>
   );

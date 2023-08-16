@@ -59,13 +59,7 @@ const BlogPageBanner = () => {
 	}, []);
   return (
     <Box py={4} bgcolor="white" color="black">
-      {/* <CenteredContainer>
-        <Fade in={checked === true} timeout={1000}>
-          <Typography sx={styles.bannerTitleStyle1}>LET THE GOODNESS FLOW</Typography>
-        </Fade>
-        <img src={blogbanner} alt="Blog Banner" style={{ width: "100%", margin: "auto" }} />
-      </CenteredContainer> */}
-
+  
       {blogsData.map((items)=>{
         return (
           <>

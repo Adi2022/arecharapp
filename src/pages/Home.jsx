@@ -17,14 +17,14 @@ const Home = () => {
       <HomeBanner/>
       <br/>
       <HomeProductsInfo/>
-      <VitagolProductInfo/>
+      {/* <VitagolProductInfo/> */}
       <WecareBanner/>
       <BookSlot/>
       <ReviewPage/>
       <BlogsPage/>
       <FaqsPage/>
       <YoutubeVideo/>
-      <FeaturedProducts/>
+      {/* <FeaturedProducts/> */}
       <LearnMore/>
     </div>
   )

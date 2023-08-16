@@ -3,7 +3,6 @@ import { Grid, Card, CardMedia, Box, Typography } from "@mui/material";
 import product1 from "../assets/product1.png";
 import product2 from "../assets/product2.png";
 import { motion } from "framer-motion"
-
 const blogsData = [
   { image: product1, text: "Vitagoli Vitamin Gummies Hair, Skin and Nails" },
   { image: product2, text: "Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA" },
@@ -74,6 +73,10 @@ const ShopProducts = () => {
           </Grid>
         </Grid>
       ))}
+          <video controls width="100%" height="auto">
+        <source src={"https://vimeo.com/854327110"} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </Grid>
   );
 };

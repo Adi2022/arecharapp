@@ -7,7 +7,7 @@ const styles = {
     position: "relative",
     marginTop: {
       xs: "36%",
-      md: "10%"
+     
     }
   },
   callQueryButton: {
@@ -15,26 +15,15 @@ const styles = {
     backgroundColor: "#009090",
     color: "#fff",
 
-    "@media (max-width: 600px)": {
-      width: "100px", // Adjusted width for medium screens
-      height: "50px", // Adjusted height for medium screens
-    },
-    "@media (max-width: 400px)": {
-      width: "40px", // Adjusted width for small screens
-      height: "40px", // Adjusted height for small screens
-    },
-    "@media (max-width: 320px)": {
-      width: "30px", // Adjusted width for extra small screens
-      height: "30px", // Adjusted height for extra small screens
-    },
+   
   },
   buttonContainer: {
     position: "fixed", // Change position to "fixed"
    
     zIndex: 999,
     top:{
-      md:"400px",
-      xs:"150px"
+      md:"200px",
+      xs:"20px"
     },
     right:{
       md:"-10px",

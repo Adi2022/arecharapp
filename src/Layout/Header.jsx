@@ -133,7 +133,7 @@ const Header = () => {
 													textDecoration: selectedPage === page.path ? "underline" : "none",
 													fontWeight: selectedPage === page.path ? "bold" : "normal",
 												}}
-												onMouseEnter={handleProductsMenuOpen}
+												onMouseEnter={(event) => handleProductsMenuOpen(event, page.path)}
 												onMouseLeave={handleProductsMenuClose}
 											>
 												<Typography
@@ -152,25 +152,29 @@ const Header = () => {
 									onClose={handleProductsMenuClose}
 									onMouseEnter={handleProductsMenuOpen} // Keep the menu open when hovering over it
 									onMouseLeave={handleProductsMenuClose} // Close the menu when not hovering
-									anchorOrigin={{ vertical: "top" }} // Adjust menu position
-									transformOrigin={{ vertical: "top",  }} // Adjust menu position
+									anchorOrigin={{
+									
+									  }}
+									  transformOrigin={{
+										
+									  }}
 									style={{cursor:"pointer"}}
 								>
 									<MenuItem
-										style={styles.main}
+										sx={styles.main}
 										component={NavLink}
 										to="/productVitagoli"
 										onClick={handleProductsMenuClose}
 									>
-										Vitagoli Vitamin Gummies Hair, Skin and Nails
+										<Typography fontSize="12px" >Vitagoli Vitamin Gummies Hair, Skin and Nails</Typography>
 									</MenuItem>
 									<MenuItem
-										style={styles.main}
+										sx={styles.main}
 										component={NavLink}
 										to="/productVitagoliPre"
 										onClick={handleProductsMenuClose}
 									>
-										Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA
+										<Typography fontSize="12px">Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA</Typography>
 									</MenuItem>
 								</Menu>
 										</React.Fragment>
@@ -265,25 +269,25 @@ const Header = () => {
 									onClose={handleProductsMenuClose}
 									onMouseEnter={handleProductsMenuOpen} // Keep the menu open when hovering over it
 									onMouseLeave={handleProductsMenuClose} // Close the menu when not hovering
-									anchorOrigin={{ vertical: "top" }} // Adjust menu position
-									transformOrigin={{ vertical: "top",  }} // Adjust menu position
-									style={{cursor:"pointer"}}
+									anchorOrigin={{ vertical: "left" }} // Adjust menu position
+									transformOrigin={{ vertical: "left",  }} // Adjust menu position
+									style={{cursor:"pointer",width:"60%"}}
 								>
 									<MenuItem
-										style={styles.main}
+										sx={styles.main}
 										component={NavLink}
 										to="/productVitagoli"
 										onClick={handleProductsMenuClose}
 									>
-										Vitagoli Vitamin Gummies Hair, Skin and Nails
+										<Typography fontSize="12px" >Vitagoli Vitamin Gummies Hair, Skin and Nails</Typography>
 									</MenuItem>
 									<MenuItem
-										style={styles.main}
+										sx={styles.main}
 										component={NavLink}
 										to="/productVitagoliPre"
 										onClick={handleProductsMenuClose}
 									>
-										Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA
+										<Typography fontSize="12px">Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA</Typography>
 									</MenuItem>
 								</Menu>
 										</React.Fragment>
