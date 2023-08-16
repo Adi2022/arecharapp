@@ -14,6 +14,8 @@ app.use("/impact1", require("./routes/impactRoute1"));
 app.use("/impact2", require("./routes/impactRoute2"));
 app.use("/about1", require("./routes/aboutRoute"));
 app.use("/ingredient", require("./routes/ingredientRoute"));
+app.use("/home", require("./routes/home1Route"));
+app.use("/bookSlot", require("./routes/bookSlotRoute"));
 
 
 
