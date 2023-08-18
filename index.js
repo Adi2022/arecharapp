@@ -17,6 +17,8 @@ app.use("/about1", require("./routes/aboutRoute"));
 app.use("/ingredient", require("./routes/ingredientRoute"));
 app.use("/home", require("./routes/home1Route"));
 app.use("/bookSlot", require("./routes/bookSlotRoute"));
+app.use("/shop", require("./routes/shopRoute"));
+app.use("/shopProduct", require("./routes/productRoute"));
 
 
 
