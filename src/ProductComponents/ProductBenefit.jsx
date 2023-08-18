@@ -5,7 +5,7 @@ import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 
 const styles = {
-  main: {
+  main1: {
     backgroundColor: "#fff",
     paddingLeft: "6%",
     paddingRight: "6%",
@@ -39,7 +39,7 @@ const ProductBenefit = () => {
   return (
     <Grid
       container
-      style={styles.main}
+      style={styles.main1}
       sx={{
         display: "flex",
         justifyContent: "center",

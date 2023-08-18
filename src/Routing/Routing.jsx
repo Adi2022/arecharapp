@@ -16,6 +16,8 @@ import Login from '../Login/Login'
 import Register from '../Login/Register'
 import ForgotPassword from '../Login/ForgotPassword'
 import SingleBlogData from '../anotherComponent/SingleBlogData'
+import Cart from '../ShopComponent/Cart'
+import SingleProduct from '../ShopComponent/SingleProduct'
 
 const Routing = () => {
   return (
@@ -27,9 +29,11 @@ const Routing = () => {
         <Route  path="/products" element={<Products/>}/>
         <Route  path="/ingredient" element={<Ingredient/>}/>
         <Route  path="/shop" element={<Shop/>}/>
+        <Route  path="/cart" element={<Cart/>}/>
         <Route  path="/about" element={<About/>}/>
         <Route  path="/blog" element={<Blog/>}/>
         <Route path="/blog/singleblog/:id" element={<SingleBlogData />} />
+        <Route path="/shop/singleProduct/:id" element={<SingleProduct />} />
         <Route  path="/impact" element={<Impact/>}/>
         <Route   path="/productVitagoli" element={<Products/>}/>
         <Route  path="/productVitagoliPre" element={<ProductVitagoliPre/>}/>

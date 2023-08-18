@@ -22,7 +22,7 @@ const styles = {
    
     zIndex: 999,
     top:{
-      md:"200px",
+      md:"400px",
       xs:"20px"
     },
     right:{

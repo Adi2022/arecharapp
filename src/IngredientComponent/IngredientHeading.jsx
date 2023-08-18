@@ -4,6 +4,7 @@ import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {BASE_URL} from "../helper"
 const styles = {
 	banner: {
 		width: "100%",
@@ -47,7 +48,7 @@ const IngredientHeading = () => {
 	const checked = true;
 	const fetchBlogs = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/ingredient");
+			const response = await axios.get(`https://mernappback12.onrender.com/ingredient`);
 			console.log(response);
 			setBlogsData(response.data.blogs);
 		} catch (error) {

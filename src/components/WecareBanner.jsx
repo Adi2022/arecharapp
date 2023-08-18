@@ -66,7 +66,7 @@ const WecareBanner = () => {
 	const checked = true;
 	const fetchBlogs = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/home");
+			const response = await axios.get("https://mernappback12.onrender.com/home");
 			console.log(response);
 			setBlogsData(response.data.impact1); // Update this line
 		} catch (error) {

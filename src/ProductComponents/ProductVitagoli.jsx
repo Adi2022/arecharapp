@@ -37,39 +37,9 @@ const styles={
 }
 
 const ProductVitagoli = () => {
-	const [openModal, setOpenModal] = useState(false);
-
-	const params = useParams();
-
-	const getSinglePhotographer = async () => {
-		const res = await fetch(`http://35.154.144.61:3000/photographerDetail/${params.id}`);
-		const data = await res.json();
-		setMyPhoto(data.photographers[0]);
-		setServicesOffered(data.servicesOffered); // Update the services offered
-
-		console.log(data);
-	};
-
-	const getServices = async () => {
-		const res = await fetch("http://35.154.144.61:3000/vendors");
-		const data = await res.json();
-		setServices(data);
-	};
-
-	const loadMorePhotos = () => {};
-	useEffect(() => {
-		getSinglePhotographer();
-		getServices();
-	}, []);
-
-	const handleOpenModal = () => {
-		setOpenModal(true);
-	};
-
-	const handleCloseModal = () => {
-		setOpenModal(false);
-	};
-
+	const handleClick=()=>{
+		alert("hello")
+	}
 	return (
 		<div>
 			<Grid container spacing={2} p={4} sx={styles.main}>
@@ -167,6 +137,8 @@ const ProductVitagoli = () => {
 								}}
 							>
 								<Button
+
+								onClick={handleClick}
 									sx={{
 										bgcolor: "#009090",
 

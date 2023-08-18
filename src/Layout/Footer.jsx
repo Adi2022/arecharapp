@@ -1,159 +1,198 @@
 import React from "react";
 import { Box, Container, Grid, Typography, Button, TextField } from "@mui/material";
 import logo from "../assets/logo.png";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import payment from "../assets/payment.png";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import fda from "../assets/fda.jpeg";
+import nsf from "../assets/nsf.jpeg";
+import kuler from "../assets/kosher.jpeg";
+import fssai from "../assets/fssai.jpeg";
+import payment from '../assets/payment.png'
+const styles = {
+	heading: {
+		fontSize: "16px",
+		color: "#fff",
+		fontWeight: 700,
+		marginTop: "45px",
+		marginBottom:"50px"
+	},
+	subHeading: {
+		display: "block",
+		marginBottom: "5px",
+		padding: 0,
+		textAlign: "left",
+		color: "#B0B9AE",
+		fontWeight: "normal",
+		textTransform: "capitalize",
+		textDecoration: "none",
+		transition: "transform 0.5s ease-in-out",
+		"&:hover": {
+			color: "#fff",
+			cursor: 'pointer',
+			transform: "scale(1.1)",
+			
+		},
+	},
+
+	inputbox: {
+		borderRadius: "8px",
+		backgroundColor: "#fff",
+		width: "auto",
+		outline: "none !important",
+		boxShadow: "none !important",
+		fontSize: "16px",
+		fontWeight: "500",
+		letterSpacing: ".8px",
+		color: "#000",
+		marginRight: "0.5rem",
+		marginTop:"5%"
+	},
+	emailButton: {
+		backgroundColor: "#009090",
+		color: "white",
+		width: "auto",
+		borderRadius: "8px",
+		outline: " none",
+		height: "3.2rem",
+		marginTop:"5%",
+		"&:hover": {
+			backgroundColor: "#009090",
+			color: "#fff",
+		},
+	},
+	icons: {
+		display:"flex",
+		gap:"2rem",
+		marginTop:"1rem"
+	},
+	payment:{
+		paddingLeft:'4%',
+		paddingRight:"4%"
+		
+		
+	}
+};
+
 const Footer = () => {
 	const navigate = useNavigate();
-
-	const handleButtonClick = () => {
-		navigate("/enquiry");
-	};
-
 	return (
-		<Box bgcolor={"#000"} style={{color:"white"}}>
+		<Box bgcolor={"#555"} style={{ color: "white" }} paddingBottom="5%">
 			<footer style={{ margin: "auto" }}>
 				<Box py={2}>
 					<Container maxWidth="lg">
 						<Grid container spacing={2}>
-							<Grid item xs={12} sm={6} md={3} color={"gray"}>
-								<Typography fontSize={"20px"}>
-									Keep well with <span style={{ color: "#009090", fontWeight: "bold" }}>ArchearNutra</span>
+							<Grid item xs={12} sm={6} md={3} color={"#fff"}>
+								<Typography sx={styles.heading}>Keep well with ArchearNutra</Typography>
+								<Typography sx={styles.subHeading} marginBottom="50px" >
+									Vitagoli Vitamin Gummies Hair, Nail & Skin and Vitagoli Vitamin Gummies Pre & probiotics + Algal DHA.
 								</Typography>
-								<p style={{ fontSize: "10px" }}>Subscribe our Newsletter for Exclusive Offers</p>
-								{/* Input box and button in flex layout */}
+
 								<Box display="flex" alignItems="center">
-									<TextField   sx={{ marginRight: 1 ,backgroundColor: "#fff", color: "black",border:"2px solid black"}} border="2px"  />
-									<Button variant="contained" sx={{ backgroundColor: "#009090", color: "white" }}>
-										Subscribe
+									<TextField sx={styles.inputbox} placeholder="Email" />
+									<Button sx={styles.emailButton}>
+										<NavigateNextIcon />
 									</Button>
 								</Box>
 
 								{/* Follow us heading and social media icons */}
-								<Box display="grid" alignItems="center" mt={2}>
-									<Typography variant="h6" color={"gray"} fontWeight={"bold"}>
-										Follow us:
-									</Typography>
-									<Box display="flex" alignItems="center">
-									<Link to="https://www.facebook.com/VitaGoliGummy" target="_blank" rel="noopener noreferrer">
-											<FacebookOutlinedIcon
-												style={{ width: 24, height: 24, marginRight: 2, color: "#3b5998" }}
-											/>
+								<Box display="flex" gap="3rem" mt={2}>
+									
+								<Box display="flex" gap="2rem" mt={2}>
+										<Link to="https://www.facebook.com/VitaGoliGummy" target="_blank" rel="noopener noreferrer">
+											<FacebookOutlinedIcon style={{ width: 30, height: 30, marginRight: 2, color: "#000" ,borderRadius:"50px",backgroundColor:"#fff"}} />
 										</Link>
 										<Link to="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
-											<TwitterIcon style={{ width: 24, height: 24, marginRight: 2, color: "#1da1f2" }} />
+											<TwitterIcon style={{ width: 30, height: 30,  marginRight: 2, color: "#000" ,borderRadius:"50px",backgroundColor:"#fff"}} />
 										</Link>
 										<Link to="https://www.linkedin.com/company/78023607/" target="_blank" rel="noopener noreferrer">
-											<LinkedInIcon style={{ width: 24, height: 24, color: "#0077b5" }} />
+											<LinkedInIcon style={{ width: 30, height: 30,  color: "#000" ,borderRadius:"50px",backgroundColor:"#fff"}} />
 										</Link>
 										<Link to="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-										<Link to="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-											<InstagramIcon style={{ width: 24, height: 24, color: "#e4405f" }} />
-										</Link>
+											<Link to="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+												<InstagramIcon style={{ width: 30, height: 30,  color: "#000",borderRadius:"50px",backgroundColor:"#fff" }} />
+											</Link>
 										</Link>
 									</Box>
 								</Box>
 							</Grid>
 							<Grid item xs={12} sm={6} md={2}>
-								<Typography variant="h5" fontWeight={"bold"} color={"gray"}>
-									UsefulLinks
+								<Typography sx={styles.heading}>QuickLinks</Typography>
+								
+								<Typography component={Link} to="/about" color={"#B0B9AE"} sx={styles.subHeading}>
+									About
 								</Typography>
-								<br />
-								<Typography
-									variant="body2"
-									component={Link}
-									to="/about"
-									color={"gray"}
-									style={{ textDecoration: "none" }}
-								>
-									About us
-								</Typography>
-								<br /> <br />
-								<Typography variant="body2" color={"gray"}>
-									Blogs
-								</Typography>
-								<br />
-								<Typography variant="body2" color={"gray"}>
-									Careers
-								</Typography>{" "}
-								<br />
-								<Typography variant="body2" color={"gray"}>
-									Partner
-								</Typography>
-								<br />
+								<Typography sx={styles.subHeading}>Contact</Typography>
+								<Typography component={Link} to="/blog" sx={styles.subHeading}>Blogs</Typography>{" "}
+								<Typography sx={styles.subHeading}>Web Stories</Typography>
+								<Typography sx={styles.subHeading}>Testimonials</Typography>
+								<Typography sx={styles.subHeading}>Join To Earn (Affiliate)</Typography>
+								<Typography sx={styles.subHeading}>Carrers</Typography>
+
 							</Grid>
 							<Grid item xs={12} sm={6} md={2}>
-								<Typography variant="h5" color={"gray"} fontWeight={"bold"}>
-									Social Links
-								</Typography>
-								<Typography variant="body2" color={"gray"}>
-									<br />
-									Facebook
-								</Typography>
-								<Typography variant="body2" color={"gray"}>
-									<br />
-									Instagram
-								</Typography>
-								<Typography variant="body2" color={"gray"}>
-									<br />
-									Twitter
-								</Typography>
-								<Typography variant="body2" color={"gray"}>
-									<br />
-									Linkedin
+								<Typography sx={styles.heading}>Products</Typography>
+								<Typography component={Link} to="/productVitagoli" sx={styles.subHeading}>Vitagoli Vitamin Gummies Hair, Skin and Nails</Typography>
+								<Typography component={Link} to="/productVitagoliPre" sx={styles.subHeading}>
+									Vitagoli Pre and Probiotics Vitamin Gummies with Algal DHA
 								</Typography>
 							</Grid>
 							<Grid item xs={12} sm={6} md={2}>
-								<Typography variant="h5" color={"gray"} fontWeight={"bold"}>
-									Policies
-								</Typography>
-								<br />
-								<Typography variant="body2" color={"gray"}>
-									Return Policy
-								</Typography>
-								<br />
-								<Typography variant="body2" color={"gray"}>
-									Privacy Policy
-								</Typography>
-								<br />
-								<Typography variant="body2" color={"gray"}>
-									Terms & Conditions
-								</Typography>
+								<Typography sx={styles.heading}>Policies</Typography>
+
+								<Typography sx={styles.subHeading}>Return Policy</Typography>
+
+								<Typography sx={styles.subHeading}>Privacy Policy</Typography>
+
+								<Typography sx={styles.subHeading}>Terms & Conditions</Typography>
 							</Grid>
 
-							<Grid item xs={12} sm={6} md={2}>
-								<img src={logo} style={{ width: "30%" }} alt="Logo" />
+							<Grid item xs={12} sm={12} md={2}>
+								<img src={logo} style={{ height: "100px" }} alt="Logo" />
+								<Grid sx={styles.icons}>
+									<Grid>
+										<img src={fda} style={{ height: "30px" }} alt="Logo" />
+									</Grid>
+									<Grid>
+										<img src={nsf} style={{ height: "30px" }} alt="Logo" />
+									</Grid>
+									<Grid>
+										<img src={kuler} style={{ height: "30px" }} alt="Logo" />
+									</Grid>
+									<Grid>
+										<img src={fssai} style={{ height: "30px" }} alt="Logo" />
+									</Grid>
+								</Grid>
 							</Grid>
 						</Grid>
 					</Container>
 				</Box>
 				<Box
-				sx={{
-					width: "40%",
-					height: "4px",
-					background: "linear-gradient(to right, #e1e1e1, #000)",
-					margin: "auto",
-				}}
-			/>
-			<Grid container sx={{ mt: 2 }} justifyContent="space-around" alignItems="center">
-				{/* Left Grid (Text) */}
-				<Grid item xs={12} sm={6} md={3} style={{color:"white"}}>
-					<Typography variant="body1">Vitgoli Vitgoli Vitgoli Vitgoli</Typography>
-					<Typography variant="body1">Vitgoli Vitgoli Vitgoli Vitgoli</Typography>
+					sx={{
+						width: "80%",
+						height: "2px",
+						background: "linear-gradient(to right, #e1e1e1, #fff)",
+						margin: "auto",
+					}}
+				/>
+				<Typography textAlign="center" fontSize="25px" fontWeight="700" marginTop="2%"marginBottom="2%" >We Accept</Typography>
+				<Grid container sx={styles.payment}>
+					
+					 <Grid  item xs={12} sm={12} md={6} >
+					<Typography color="#009090" >Hair, Nail and Skin Gummies | Pre and Probiotics + Algal DHA Gummies</Typography>
+					<Typography marginTop="4%">© 2023 ArecharNutra. All Rights Reserved.</Typography>
 				</Grid>
 
-				{/* Right Grid (Payment Methods) */}
-				<Grid item xs={12} sm={6} md={3}>
-					<p>We Accept</p>
-					<img src={payment} width="100%" />
+					
+					 <Grid item xs={12} sm={12} md={6}>
+					
+					<img src={payment} style={{width:"100%"}}/>
+				</Grid> 
 				</Grid>
-			</Grid>
 			</footer>
-		
 		</Box>
 	);
 };
