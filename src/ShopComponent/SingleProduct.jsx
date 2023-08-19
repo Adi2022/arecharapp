@@ -141,7 +141,7 @@ const SingleProduct = () => {
 											bgcolor: "lightGreen",
 											color: "black",
 										},
-										width: "100%",
+										width: "50%",
 										fontWeight: "bold",
 										
 									}}
@@ -151,7 +151,7 @@ const SingleProduct = () => {
 									ADD TO CART
 								</Button>
 								
-								<NavLink to="/shop">
+								
 								<Button
 									sx={{
 										bgcolor: "#009090",
@@ -161,14 +161,14 @@ const SingleProduct = () => {
 											bgcolor: "lightGreen",
 											color: "black",
 										},
-										width: "100%",
+										width: "50%",
 										fontWeight: "bold",
 										
 									}}
 								>
 									BUY KNOW
 								</Button>
-								</NavLink>
+								
 							</div>
 							<Typography>Share the product information to a friend.</Typography>
 							<Box>

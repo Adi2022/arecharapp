@@ -18,6 +18,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Buttons from "../common/Buttons";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import {useCartContext}  from '../CartContext'
 
 const pages = [
   {
@@ -51,6 +52,8 @@ const pages = [
 ];
 
 const Header = () => {
+  const { cartCount } = useCartContext();
+
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [selectedPage, setSelectedPage] = React.useState(pages[0].path);
@@ -272,7 +275,7 @@ const Header = () => {
                 component={NavLink}
                 to="/cart"
               >
-                <ShoppingCartOutlinedIcon /> 0
+                <ShoppingCartOutlinedIcon /> {cartCount}
               </IconButton>
             </Box>
           </Box>
