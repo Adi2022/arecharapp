@@ -81,7 +81,7 @@ const ShopProducts = () => {
 								</Grid>
 								<Grid item>
 									<Box padding="16px">
-										<Typography sx={styles.bannerTitleStyle2}>INR {items.product1.price}</Typography>
+										<Typography sx={styles.bannerTitleStyle2}>INR{items.product1.price}</Typography>
 									</Box>
 								</Grid>
 							</Grid>

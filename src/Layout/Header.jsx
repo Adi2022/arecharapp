@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -12,7 +12,7 @@ import {
   Hidden,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logos.png";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Buttons from "../common/Buttons";
@@ -51,10 +51,23 @@ const pages = [
 ];
 
 const Header = () => {
+  const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [selectedPage, setSelectedPage] = React.useState(pages[0].path);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [blogsData, setBlogsData] = useState([]);
+	const fetchBlogs = async () => {
+		try {
+			const response = await axios.get("http://localhost:3000/shop");
+			console.log(response);
+			setBlogsData(response.data.shoppingEntries);
+		} catch (error) {
+			console.error("Error fetching blogs:", error);
+		}
+	};
+	useEffect(() => {
+		fetchBlogs();
+	}, []);
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -76,6 +89,10 @@ const Header = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const handleBlogs = (id) => {
+		navigate(`/shop/singleProduct/${id}`);
+	};
 
   return (
     <AppBar
