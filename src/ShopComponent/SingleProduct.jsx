@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams,useNavigate } from "react-router-dom";
 import { Grid, CardMedia, CardContent, Typography, Card, TextField, Button, Box } from "@mui/material";
 import axios from "axios";
 import Fade from "@mui/material/Fade";
@@ -7,6 +7,7 @@ import Carousel from "react-elastic-carousel";
 import { motion } from "framer-motion";
 import ShopProducts from "./ShopProducts";
 import { useCartContext } from "../CartContext";
+
 const styles = {
 	main: {
 		marginTop: {
@@ -17,13 +18,14 @@ const styles = {
 };
 
 const SingleProduct = () => {
-	const { addToCart } = useCartContext(); // Get the addToCart function from the context
-
+	const { addToCart, cartItems, updateCartItemQuantity } = useCartContext();
+	const [amount, setAmount] = useState(1);
 	const params = useParams();
 	const [singleBlog, setSingleBlog] = useState(null); // Initialize with null
 	const checked = true;
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+    const [addToCartButtonText, setAddToCartButtonText] = useState("Add to Cart");
+  const navigate=useNavigate()
 	const getSingleProduct = async () => {
 		try {
 			const response = await axios.get(`http://localhost:3000/shop/${params.id}`);
@@ -37,6 +39,19 @@ const SingleProduct = () => {
 		getSingleProduct();
 	}, []);
 
+	const handleDecrement = () => {
+		amount > 1 ? setAmount(amount - 1) : setAmount(1);
+	};
+
+	const handleIncrement = () => {
+		amount < 20 ? setAmount(amount + 1) : setAmount(20);
+	};
+	const handleAddToCart = (product) => {
+		addToCart(product);
+		console.log(product,"product")
+		setAddToCartButtonText("Go to Cart");
+	};
+	
 	if (!singleBlog) {
 		return <div>Loading...</div>;
 	}
@@ -57,6 +72,7 @@ const SingleProduct = () => {
 		{ width: 850, itemsToShow: 3 },
 		{ width: 1150, itemsToShow: 4 },
 	];
+
 	return (
 		<>
 			<Grid container spacing={2} p={4} sx={styles.main}>
@@ -111,19 +127,57 @@ const SingleProduct = () => {
 							</Typography>
 							<Typography>{singleBlog.product1.singleProduct1.description}:</Typography>
 
-							<div
-								style={{
+							<Box
+								sx={{
 									display: "flex",
+									justifyContent: "space-between",
 									alignItems: "center",
-									gap: "10px",
-									textAlign: "left",
-									marginBottom: "5%",
 								}}
 							>
-								<Typography style={{ textTransform: "uppercase" }}>Quantity</Typography>
+								<Card
+									sx={{
+										width: "100%",
+										backgroundColor: "#fff",
+										borderRadius: 1,
+									}}
+								>
+									<CardContent>
+										{/* ... other content ... */}
+										<Grid container justifyContent="start" alignItems="center" gap="25%">
+											<Typography
+												sx={{ textTransform: "uppercase", fontSize: "15px", lineHeight: "23px", fontWeight: "400" }}
+											>
+												Quantity
+											</Typography>
+											<Typography
+												sx={{ textTransform: "uppercase", fontSize: "25px", lineHeight: "50px", fontWeight: "700" }}
+											>
+												₹{singleBlog.product1.singleProduct1.price.toLocaleString("en-IN")}.00
+											</Typography>
+										</Grid>
+										<Box
+											sx={{
+												display: "flex",
+												alignItems: "left",
+												justifyContent: "start",
+												gap: "2%",
+												marginTop: "10px", // Add a margin to separate buttons from the previous content
+											}}
+										>
+											<Button onClick={handleDecrement} size="small" variant="contained">
+												-
+											</Button>
+											<Button size="small" variant="outlined">
+												{amount}
+											</Button>
+											<Button onClick={handleIncrement} size="small" variant="contained">
+												+
+											</Button>
+										</Box>
+									</CardContent>
+								</Card>
+							</Box>
 
-								<Typography variant="h5">Rs{singleBlog.product1.singleProduct1.price}</Typography>
-							</div>
 							<div
 								style={{
 									display: "flex",
@@ -132,7 +186,6 @@ const SingleProduct = () => {
 									gap: "10%",
 								}}
 							>
-								
 								<Button
 									sx={{
 										bgcolor: "#009090",
@@ -143,15 +196,19 @@ const SingleProduct = () => {
 										},
 										width: "50%",
 										fontWeight: "bold",
-										
 									}}
-									onClick={() => addToCart(singleBlog.product1.singleProduct1)} // Add the product to cart
-
+									onClick={() => {
+										if (addToCartButtonText === "Add to Cart") {
+											handleAddToCart(singleBlog.product1.singleProduct1);
+										} else {
+									
+											navigate("/cart")
+										}
+									}}
 								>
-									ADD TO CART
+									{addToCartButtonText}
 								</Button>
-								
-								
+
 								<Button
 									sx={{
 										bgcolor: "#009090",
@@ -163,12 +220,10 @@ const SingleProduct = () => {
 										},
 										width: "50%",
 										fontWeight: "bold",
-										
 									}}
 								>
 									BUY KNOW
 								</Button>
-								
 							</div>
 							<Typography>Share the product information to a friend.</Typography>
 							<Box>

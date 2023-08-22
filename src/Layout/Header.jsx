@@ -104,8 +104,8 @@ const Header = () => {
       left="0"
       width="100%"
       zIndex="99"
-      color="default"
-      sx={{ backgroundColor: "#fff", color: "#000", fontWeight: "bold" }}
+      border="none"
+      sx={{ backgroundColor: "#fff", color: "#58595B", fontWeight: "400" ,}}
     >
       <Toolbar>
         <Hidden mdUp>
@@ -139,7 +139,7 @@ const Header = () => {
                       onMouseLeave={handleMenuClose}
                     >
                       <Button
-					  
+					             
                         color="inherit"
                         sx={{
                           mx: 1,
@@ -150,7 +150,8 @@ const Header = () => {
                         }}
                       >
                         <Typography
-                          variant="subtitle1"
+                          fontSize="15px"
+                          fontWeight="700"
                           sx={{
                             color:
                               selectedPage === page.path ? "#009090" : "inherit",
@@ -275,7 +276,7 @@ const Header = () => {
                 component={NavLink}
                 to="/cart"
               >
-                <ShoppingCartOutlinedIcon /> {cartCount}
+                <ShoppingCartOutlinedIcon /><span style={{marginTop:"-50%"}}>{cartCount}</span>
               </IconButton>
             </Box>
           </Box>
@@ -308,7 +309,7 @@ const Header = () => {
             component={NavLink}
             to="/cart"
           >
-            <ShoppingCartOutlinedIcon /> 0
+            <ShoppingCartOutlinedIcon />{cartCount}
           </IconButton>
         </Box>
         <Drawer

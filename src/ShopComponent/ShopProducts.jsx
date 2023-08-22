@@ -3,9 +3,10 @@ import axios from "axios";
 import { Grid, Card, CardMedia, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { NavLink, useNavigate } from "react-router-dom";
+import Fade from "@mui/material/Fade";
 
 const styles = {
-	bannerTitleStyle3: {
+	bannerTitleStyle32: {
 		color: "#000",
 		fontWeight: 300,
 		textAlign: "left",
@@ -15,13 +16,74 @@ const styles = {
 		left: "1rem",
 		right: "1rem",
 	},
-	bannerTitleStyle2: {
+	bannerTitleStyle22: {
 		color: "#000",
 		fontWeight: "bold",
 		textAlign: "right",
 		fontSize: "24px",
 		fontFamily: "'Montserrat', sans-serif",
 		lineHeight: "31px",
+	},
+	bannerTitleStyle1: {
+		color: "#009090",
+		fontWeight: "bold",
+		textAlign: "center",
+		fontSize: "60px",
+		fontFamily: "'Montserrat', sans-serif",
+		
+		textTransform: "uppercase",
+		marginTop: {
+			xs:"40%",
+			md:"10%"
+		}
+	},
+	bannerTitleStyle2: {
+		color: "#009090",
+		fontWeight: "bold",
+		textAlign: "center",
+		fontSize: "60px",
+		fontFamily: "Montserrat, sans-serif",
+		textTransform: "uppercase",
+		
+	},
+	bannerTitleStyle3: {
+		color: "#000",
+		fontWeight: 300,
+		textAlign: "center",
+		fontSize: "16px",
+		fontFamily: "'Montserrat', sans-serif",
+		lineHeight: "1.65",
+		marginTop:"2%",
+		padding:"5%"
+	},
+
+	bannerTitleStyle4: {
+		color: "#009090",
+		fontWeight: "bold",
+		textAlign: "center",
+		fontSize: "60px",
+		fontFamily: "'Montserrat', sans-serif",
+		
+		textTransform: "uppercase",
+		marginTop: {
+			xs:"60%",
+			md:"5%"
+		}
+	},
+
+	bannerTitleStyle5: {
+		color: "#000",
+		fontWeight: 300,
+		textAlign: "center",
+		fontSize: "16px",
+		fontFamily: "'Montserrat', sans-serif",
+		lineHeight: "1.65",
+		marginTop:"4%",
+		padding:"5%",
+		marginBottom:{
+			
+			
+		}
 	},
 };
 const ShopProducts = () => {
@@ -49,6 +111,32 @@ const ShopProducts = () => {
 			{blogsData.map((items) => {
 				return (
 					<>
+					<Grid>
+					<Fade in={checked === true} timeout={1000}>
+					<Typography variant="h3" sx={styles.bannerTitleStyle1}>
+						{items.shop.heading} {items.shop.subHeading}
+					</Typography> 
+					
+				</Fade>
+				<Fade in={checked === true} timeout={1000}>
+					<Typography variant="h3" sx={styles.bannerTitleStyle3}>
+					{items.shop.description} 
+					</Typography>
+				</Fade>
+
+				<Fade in={checked === true} timeout={1000}>
+					<Typography variant="h3" sx={styles.bannerTitleStyle4}>
+						{items.productVitagoli.name}
+					</Typography> 
+					
+				</Fade>
+				<Fade in={checked === true} timeout={1000}>
+					<Typography variant="h3" sx={styles.bannerTitleStyle5}>
+					{items.productVitagoli.content} 
+					</Typography>
+				</Fade>
+					</Grid>
+					  
 						<Grid item xs={12} sm={6} md={6} onClick={() => handleBlogs(items._id)}>
 							<Card sx={{ maxWidth: 400, width: "100%", margin: "auto" }}>
 								<div
@@ -74,14 +162,16 @@ const ShopProducts = () => {
 							<Grid container justifyContent="center">
 								<Grid item xs={12} md={6}>
 									<Box padding="16px">
-										<Typography variant="h3" sx={styles.bannerTitleStyle3}>
+										<Typography variant="h3" sx={styles.bannerTitleStyle32}>
 											{items.product1.title}
 										</Typography>
 									</Box>
 								</Grid>
 								<Grid item>
 									<Box padding="16px">
-										<Typography sx={styles.bannerTitleStyle2}>INR{items.product1.price}</Typography>
+										<Typography sx={styles.bannerTitleStyle22}>
+											₹{items.product1.price.toLocaleString("en-IN")}.00
+										</Typography>
 									</Box>
 								</Grid>
 							</Grid>

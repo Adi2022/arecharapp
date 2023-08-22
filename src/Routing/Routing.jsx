@@ -18,6 +18,7 @@ import ForgotPassword from '../Login/ForgotPassword'
 import SingleBlogData from '../anotherComponent/SingleBlogData'
 import Cart from '../ShopComponent/Cart'
 import SingleProduct from '../ShopComponent/SingleProduct'
+import Checkout from '../ShopComponent/Checkout'
 
 const Routing = () => {
   return (
@@ -29,6 +30,7 @@ const Routing = () => {
         <Route  path="/products" element={<Products/>}/>
         <Route  path="/ingredient" element={<Ingredient/>}/>
         <Route  path="/shop" element={<Shop/>}/>
+        <Route  path="/checkout" element={<Checkout/>}/>
         <Route  path="/cart" element={<Cart/>}/>
         <Route  path="/about" element={<About/>}/>
         <Route  path="/blog" element={<Blog/>}/>

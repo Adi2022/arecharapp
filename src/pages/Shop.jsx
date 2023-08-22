@@ -1,15 +1,12 @@
-import React from 'react'
-import ShopHeading from '../ShopComponent/ShopHeading'
-import ShopProducts from '../ShopComponent/ShopProducts'
+import React from "react";
+import ShopProducts from "../ShopComponent/ShopProducts";
 
 const Shop = () => {
-  return (
-    <div>
-      <ShopHeading/>
-      {/* <ShopVitagoli/> */}
-      <ShopProducts/>
-    </div>
-  )
-}
+	return (
+		<div>
+			<ShopProducts/>
+		</div>
+	);
+};
 
-export default Shop
+export default Shop;
