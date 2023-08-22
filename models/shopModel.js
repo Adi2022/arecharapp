@@ -41,6 +41,12 @@ const shopSchema = new mongoose.Schema({
                     type:String,
                 }
             ],
+            quantity:{
+                type: Number
+            },
+            total:{
+                type:Number
+            },
             productQualityPhotos:[
                 {
                     type:String
@@ -209,17 +215,7 @@ const shopSchema = new mongoose.Schema({
 
     },
 
-    // product2:{
-    //     photos:[{
-    //         type:String,
-    //     }],
-    //     price:{
-    //         type:Number
-    //     },
-    //     title:{
-    //         type:String
-    //     }
-    // },
+   
 	
 });
 

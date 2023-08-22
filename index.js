@@ -19,6 +19,8 @@ app.use("/home", require("./routes/home1Route"));
 app.use("/bookSlot", require("./routes/bookSlotRoute"));
 app.use("/shop", require("./routes/shopRoute"));
 app.use("/shopProduct", require("./routes/productRoute"));
+app.use("/cartProduct", require("./routes/cartRoute"));
+app.use("/checkoutCustomer", require("./routes/checkoutRoute"));
 
 
 

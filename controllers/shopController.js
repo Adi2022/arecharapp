@@ -20,6 +20,8 @@ const createShopping = async (req, res) => {
         title: product1.title,
         singleProduct1: {
           photos: product1.singleProduct1.photos,
+          quantity: product1.singleProduct1.quantity,
+          total: product1.singleProduct1.total,
           productBannerPhoto: product1.singleProduct1.productBannerPhoto,
           productQualityPhotos: product1.singleProduct1.productQualityPhotos,
           heading: product1.singleProduct1.heading,
@@ -82,11 +84,7 @@ const createShopping = async (req, res) => {
         
         },
       },
-      // product2: {
-      //   photos: product2.photos,
-      //   price: product2.price,
-      //   title: product2.title,
-      // },
+      
     });
 
     res.status(201).json(newShopping);
