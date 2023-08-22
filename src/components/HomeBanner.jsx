@@ -31,13 +31,13 @@ const HomeBanner = () => {
 
   return (
     <Box sx={styles.main}>
-      <Carousel>
+      {/* <Carousel> */}
       {blogsData.map((photoUrl, index) => (
           <Paper key={index}>
             <img src={photoUrl} alt={`Carousel ${index}`} style={{ width: "100%" }} />
           </Paper>
         ))}
-      </Carousel>
+      {/* </Carousel> */}
       <ModalComponent/>
     </Box>
   );

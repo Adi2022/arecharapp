@@ -7,10 +7,13 @@ import { useCartContext } from "../CartContext";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { NavLink, useNavigate } from "react-router-dom";
+import queryString from "query-string";
+
 const Cart = () => {
 	const [totalCartAmount, setTotalCartAmount] = useState(0);
 
-	const { cartItems, removeFromCart, clearCart } = useCartContext();
+	const { cartItems, removeFromCart, clearCart,setCartItems } = useCartContext();
+	console.log(cartItems)
 	const navigate = useNavigate();
 	const [itemQuantities, setItemQuantities] = useState({});
 	const handleDecrement = (itemId) => {
@@ -21,7 +24,6 @@ const Cart = () => {
 			}));
 		}
 	};
-
 	const handleIncrement = (itemId) => {
 		if (itemQuantities[itemId] < 20) {
 			setItemQuantities((prevQuantities) => ({
@@ -30,26 +32,41 @@ const Cart = () => {
 			}));
 		}
 	};
-
 	const movetoShop = () => {
 		navigate("/shop");
-		
 	};
-
 	const movetoCheckout = () => {
-		navigate("/checkout");
-		
-	};
-
+		// Construct a query parameter string with the selected product data
+		const queryParams = queryString.stringify({
+		  products: JSON.stringify(cartItems),
+		  // You can include other information like quantities, etc. if needed
+		});
+	
+		// Navigate to the checkout route with the query parameters
+		navigate(`/checkout?${queryParams}`);
+	  };
+	
 	useEffect(() => {
 		// Initialize item quantities based on cart items
 		const quantities = {};
 		cartItems.forEach((item) => {
-			quantities[item.id] = 1; // Initial quantity is 1
+		  quantities[item.id] = 1; // Initial quantity is 1
 		});
 		setItemQuantities(quantities);
-	}, [cartItems]);
-
+	
+		// Save cart items to localStorage
+		localStorage.setItem("cartItems", JSON.stringify(cartItems));
+	  }, [cartItems]);
+	
+	  useEffect(() => {
+		// Retrieve cart items from localStorage on component mount
+		const savedCartItems = localStorage.getItem("cartItems");
+		if (savedCartItems) {
+		  const parsedCartItems = JSON.parse(savedCartItems);
+		  setCartItems(parsedCartItems);
+		}
+	  }, []);
+	
 	return (
 		<Grid marginTop="0%" padding="12%">
 			<Grid container justifyContent="flex-end" marginBottom="20px"></Grid>
@@ -80,7 +97,8 @@ const Cart = () => {
 								Clear Cart
 							</Button>
 						</Grid>
-					</Grid>
+					</Grid> 
+					
 					{cartItems.map((item) => {
 						const quantity = itemQuantities[item.id] || 1;
 						const totalAmount = quantity * item.price;

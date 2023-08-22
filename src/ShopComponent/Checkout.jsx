@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import { Grid, Paper, Typography, TextField, Button, IconButton, InputAdornment,Divider,Box } from "@mui/material";
+import React, { useState,useEffect } from "react";
+import { Grid, Paper, Typography, TextField, Button, IconButton, InputAdornment, Divider, Box } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import logo from "../assets/logo.png";
+import cart from "../assets/cart.jpg";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import SendIcon from "@mui/icons-material/Send";
+import queryString from "query-string";
+import { useCartContext } from "../CartContext";
 
-
-const styles={
-    inputbox:{
-        borderRadius: "50px",
+const styles = {
+	inputbox: {
 		backgroundColor: "#fff",
 		width: "100%",
 		outline: "none !important",
@@ -20,25 +21,45 @@ const styles={
 		letterSpacing: ".8px",
 		color: "#000",
 		marginRight: "0.5rem",
-		marginTop:"5%"
-    },
-    emailButton: {
+		marginTop: "5%",
+	},
+	emailButton: {
 		backgroundColor: "#009090",
 		color: "white",
 		width: "auto",
-		borderRadius: "8px",
+
 		outline: " none",
 		height: "3.2rem",
-		marginTop:"5%",
+		marginTop: "5%",
 		"&:hover": {
 			backgroundColor: "#009090",
 			color: "#fff",
 		},
 	},
-}
+	sendButton: {
+		backgroundColor: "#009090",
+		color: "white",
+		width: "auto",
+		outline: " none",
+		height: "3.2rem",
+		marginTop: "5%",
+		"&:hover": {
+			backgroundColor: "#009090",
+			color: "#fff",
+		},
+	},
+};
 
 const Checkout = () => {
 	const navigate = useNavigate();
+	const { cartItems, removeFromCart, clearCart,setCartItems } = useCartContext();
+	console.log(cartItems,'cartitemssss')
+	const location = useLocation();
+	const queryParams = queryString.parse(location.search);
+	const selectedProducts = JSON.parse(queryParams.products);
+	const [itemQuantities, setItemQuantities] = useState({});
+
+	console.log("selected products:", selectedProducts);
 	const [showP, setShowP] = useState(false);
 	const [inputData, setInputData] = useState({
 		name: "",
@@ -59,10 +80,7 @@ const Checkout = () => {
 		});
 	};
 
-	const handleTogglePassword = () => {
-		setShowP(!showP);
-	};
-
+	
 	const validateInput = () => {
 		const { name, phoneNumber, email, pinCode, addressLine1, addressLine2, city, state } = inputData;
 
@@ -89,34 +107,21 @@ const Checkout = () => {
 		return true;
 	};
 
-	const sendEmail = async () => {
-		if (!validateInput()) {
-			return;
-		}
 
-		try {
-			const response = await fetch("http://35.154.144.61:3000/sendEmail", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(inputData),
-			});
-
-			if (response.ok) {
-				toast.success("Enquiry sent successfully");
-				setTimeout(() => {
-					navigate("/enquiryMsg");
-				}, 1000);
-			} else {
-				toast.error("Failed to send enquiry");
-			}
-		} catch (error) {
-			console.error("Error sending enquiry:", error);
-			toast.error("An error occurred while sending the enquiry");
-		}
+	const handleGoToCart = () => {
+		navigate("/cart");
 	};
-
+	useEffect(() => {
+		// Initialize item quantities based on cart items
+		const quantities = {};
+		cartItems.forEach((item) => {
+		  quantities[item.id] = 1; // Initial quantity is 1
+		});
+		setItemQuantities(quantities);
+	
+		// Save cart items to localStorage
+		localStorage.setItem("cartItems", JSON.stringify(cartItems));
+	  }, [cartItems]);
 	return (
 		<>
 			<Grid container component="main" sx={{ height: "auto" }} marginTop="5%" padding="5%">
@@ -230,41 +235,74 @@ const Checkout = () => {
 				{/* Right grid for the form */}
 				<Grid item xs={false} sm={4} md={6}>
 					<Grid container>
-                    <Grid display="flex" gap="20px" alignItems="center">
-                    <Typography component="h1" variant="h5" fontWeight={"bold"} style={{ color: "#555" }}>
-							Your Order
-						</Typography>
-                        <Typography  style={{ color: "#555" }}>
-							Go to cart
-						</Typography>
-                        </Grid>
-                      
+						<Grid
+							container
+							direction="row"
+							justifyContent="center"
+							padding={2}
+							sx={{ height: "auto" }}
+							alignItems="center"
+							gap="2%"
+						>
+							<Typography component="h1" variant="h5" fontWeight={"bold"} style={{ color: "#555" }}>
+								Your Order
+							</Typography>
+							<Typography style={{ color: "#555" }} fontSize="10px" fontWeight="700" onClick={handleGoToCart}>
+								Go to cart
+							</Typography>
+						</Grid>
 					</Grid>
-                   <Grid container>
-                    <Grid md={4}>
-                        a
-                    </Grid>
-                    <Grid md={4}>
-                        a
-                    </Grid>
-                    <Grid md={4}>
-                        a
-                    </Grid>
-                   </Grid>
-                   <Divider />
-                   <Typography component="h5" variant="h5" fontWeight={"normal"} style={{ color: "#555" }}>
-							Have Promocode ?
-						</Typography>
-                        <Grid container>
+					<Grid container padding="2%" item md={12} xs={12}>
+						{cartItems.map((item) => {
+							const quantity = itemQuantities[item.id] || 1;
+							const totalAmount = quantity * item.price;
+	
+							return (
+
+								<React.Fragment key={item.id}>
+								<Grid item md={3}>
+									<img src={item.productBannerPhoto} style={{ height: "50px", width: "50px" }} alt="Product" />
+								</Grid>
+								<Grid item md={4}>
+									<Typography sx={{ color: "#000", cursor: "pointer", textAlign: "left", fontSize: "1rem" }}>
+										{item.heading}
+									</Typography>
+									<Typography>Quantity: {quantity}</Typography>
+								</Grid>
+								<Grid item md={4}>
+									<Typography>₹{item.price}</Typography>
+									<Typography>Total: ₹{totalAmount.toLocaleString("en-IN")}.00</Typography>
+								</Grid>
+							</React.Fragment>
+							)
+							
+						})}
+					</Grid>
+					<Divider style={{ marginTop: "5%" }} />
+					<Typography
+						sx={{
+							color: "#555",
+							fontWeight: "400",
+							fontSize: "1rem",
+							fontFamily: "Montserrat,sans-serif ",
+							marginTop: "10%",
+						}}
+					>
+						Have Promocode ?
+					</Typography>
+					<Grid container>
 						<Grid item md={12}>
-						
-									<TextField sx={styles.inputbox} placeholder="Enter Promocode"  />
-									<Button sx={styles.emailButton}>
-										Apply
-									</Button>
-								
+							<Box sx={{ display: "flex" }}>
+								<TextField sx={{ ...styles.inputbox, flexGrow: 1 }} placeholder="Enter Promocode" />
+								<Button sx={styles.emailButton}>Apply</Button>
+							</Box>
+							<Grid display="flex" justifyContent="end">
+								<Button sx={styles.sendButton} endIcon={<SendIcon />}>
+									Proceed to Payment
+								</Button>
+							</Grid>
 						</Grid>
-						</Grid>
+					</Grid>
 				</Grid>
 			</Grid>
 			<ToastContainer

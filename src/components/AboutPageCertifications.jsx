@@ -1,11 +1,6 @@
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Fade from "@mui/material/Fade";
-import fda from "../assets/fda.jpeg";
-import nsf from "../assets/nsf.jpeg";
-import fssai from "../assets/fssai.jpeg";
-import kosher from "../assets/kosher.jpeg";
-import halal from "../assets/halal.jpeg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 const styles = {

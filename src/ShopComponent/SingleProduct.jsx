@@ -66,12 +66,7 @@ const SingleProduct = () => {
 	));
 	const visibleImages = imagesTypes.slice(currentImageIndex, currentImageIndex + 9); // Show 6 images at a time
 
-	const carouselBreakpoints = [
-		{ width: 1, itemsToShow: 1 },
-		{ width: 550, itemsToShow: 2 },
-		{ width: 850, itemsToShow: 3 },
-		{ width: 1150, itemsToShow: 4 },
-	];
+	
 
 	return (
 		<>
@@ -110,14 +105,14 @@ const SingleProduct = () => {
 						alignItems: "center",
 					}}
 				>
-					<Card
+					<div
 						sx={{
 							width: "100%",
 							backgroundColor: "#fff",
 							borderRadius: 1,
 						}}
 					>
-						<CardContent>
+						
 							<Typography variant="h6" sx={{ fontWeight: 700 }}>
 								{singleBlog.product1.singleProduct1.heading}
 							</Typography>
@@ -243,8 +238,8 @@ const SingleProduct = () => {
 									</Typography>
 								</Box>
 							</Box>
-						</CardContent>
-					</Card>
+						
+					</div>
 				</Grid>
 			</Grid>
 			<Grid container spacing={2} justifyContent="center">

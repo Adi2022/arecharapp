@@ -10,7 +10,6 @@ import Blog from '../pages/Blog'
 import Impact from '../pages/Impact'
 import Header from '../Layout/Header'
 import Footer from '../Layout/Footer'
-import ProductVitagoliPre from '../ProductComponents/ProductVitagoliPre'
 import GoToTopPage from '../GoToTopPage'
 import Login from '../Login/Login'
 import Register from '../Login/Register'
@@ -19,6 +18,7 @@ import SingleBlogData from '../anotherComponent/SingleBlogData'
 import Cart from '../ShopComponent/Cart'
 import SingleProduct from '../ShopComponent/SingleProduct'
 import Checkout from '../ShopComponent/Checkout'
+import CartLatest from '../ShopComponent/CartLatest'
 
 const Routing = () => {
   return (
@@ -32,13 +32,14 @@ const Routing = () => {
         <Route  path="/shop" element={<Shop/>}/>
         <Route  path="/checkout" element={<Checkout/>}/>
         <Route  path="/cart" element={<Cart/>}/>
+        <Route  path="/cartLatest" element={<CartLatest/>}/>
         <Route  path="/about" element={<About/>}/>
         <Route  path="/blog" element={<Blog/>}/>
         <Route path="/blog/singleblog/:id" element={<SingleBlogData />} />
         <Route path="/shop/singleProduct/:id" element={<SingleProduct />} />
         <Route  path="/impact" element={<Impact/>}/>
         <Route   path="/productVitagoli" element={<Products/>}/>
-        <Route  path="/productVitagoliPre" element={<ProductVitagoliPre/>}/>
+       
         <Route  path="/login" element={<Login/>}/>
         <Route  path="/register" element={<Register/>}/>
         <Route  path="/forgot_password" element={<ForgotPassword/>}/>

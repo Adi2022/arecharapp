@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
-import Planet from '../assets/planet-img.jpg'
 const styles = {
 	main: {
 		backgroundColor: "#fff",

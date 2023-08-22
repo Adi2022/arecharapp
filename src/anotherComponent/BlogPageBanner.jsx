@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import blogbanner from "../assets/blog-1.jpg";
 import Fade from "@mui/material/Fade";
 import axios from "axios";
 

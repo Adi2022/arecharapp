@@ -41,7 +41,8 @@ export const CartProvider = ({ children }) => {
     clearCart,
     cartCount,
     updateCartItemQuantity,
-    addedToCart
+    addedToCart,
+    setCartItems
   };
 
   return (
