@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Paper, Typography, TextField, Button, IconButton, InputAdornment, Divider, Box } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -52,8 +52,8 @@ const styles = {
 
 const Checkout = () => {
 	const navigate = useNavigate();
-	const { cartItems, removeFromCart, clearCart,setCartItems } = useCartContext();
-	console.log(cartItems,'cartitemssss')
+	const { cartItems, removeFromCart, clearCart, setCartItems } = useCartContext();
+	console.log(cartItems, "cartitemssss");
 	const location = useLocation();
 	const queryParams = queryString.parse(location.search);
 	const selectedProducts = JSON.parse(queryParams.products);
@@ -73,40 +73,86 @@ const Checkout = () => {
 	});
 
 	const handleInput = (e) => {
-		const { name, value } = e.target;
-		setInputData({
-			...inputData,
-			[name]: value,
-		});
-	};
+        const { name, value } = e.target;
+        setInputData({
+          ...inputData,
+          [name]: value,
+        });
+      };
 
-	
-	const validateInput = () => {
-		const { name, phoneNumber, email, pinCode, addressLine1, addressLine2, city, state } = inputData;
+	  const validateEmail = (email) => {
+       
+    
+    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      };
+	const PostData = async (e) => {
+		e.preventDefault();
+		const { name, email, phoneNumber, city, state, addressLine1, addressLine2, pinCode } = inputData;
 
 		if (!name.trim()) {
 			toast.error("Name is required");
-			return false;
+			return;
 		}
-
 		if (!phoneNumber.trim()) {
-			toast.error("Phone number is required");
-			return false;
+			toast.error("PhoneNumber is required");
+			return;
 		}
 
+		if (!email.trim()) {
+			toast.error("Email is required");
+			return;
+		}
+		if (!validateEmail(email)) {
+			toast.error("Invalid email address");
+			return;
+		}
 		if (!city.trim()) {
 			toast.error("City is required");
-			return false;
+			return;
+		}
+		if (!state.trim()) {
+			toast.error("State is required");
+			return;
+		}
+		if (!pinCode.trim()) {
+			toast.error("PinCode is required");
+			return;
+		}
+		if (!addressLine1.trim()) {
+			toast.error("AddressLine1 is required");
+			return;
+		}
+		if (!addressLine2.trim()) {
+			toast.error("AddressLine2 is required");
+			return;
 		}
 
-		if (!reason.trim()) {
-			toast.error("Reason is required");
-			return false;
+		try {
+			const res = await fetch("http://localhost:3000/checkoutCustomer", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name, email, phoneNumber, city, state, addressLine1, addressLine2, pinCode
+				}),
+			});
+			const data = await res.json();
+			console.log(data);
+			if (data.error) {
+				toast.error(<strong style={{ color: "red" }}>{data.error}</strong>);
+			} else {
+				toast.warn("Going to Payment Page");
+				setTimeout(() => {
+					navigate("/");
+				}, 1000);
+			}
+		} catch (error) {
+			console.log(error);
 		}
-
-		return true;
 	};
-
 
 	const handleGoToCart = () => {
 		navigate("/cart");
@@ -115,13 +161,13 @@ const Checkout = () => {
 		// Initialize item quantities based on cart items
 		const quantities = {};
 		cartItems.forEach((item) => {
-		  quantities[item.id] = 1; // Initial quantity is 1
+			quantities[item.id] = 1; // Initial quantity is 1
 		});
 		setItemQuantities(quantities);
-	
+
 		// Save cart items to localStorage
 		localStorage.setItem("cartItems", JSON.stringify(cartItems));
-	  }, [cartItems]);
+	}, [cartItems]);
 	return (
 		<>
 			<Grid container component="main" sx={{ height: "auto" }} marginTop="5%" padding="5%">
@@ -256,26 +302,24 @@ const Checkout = () => {
 						{cartItems.map((item) => {
 							const quantity = itemQuantities[item.id] || 1;
 							const totalAmount = quantity * item.price;
-	
-							return (
 
+							return (
 								<React.Fragment key={item.id}>
-								<Grid item md={3}>
-									<img src={item.productBannerPhoto} style={{ height: "50px", width: "50px" }} alt="Product" />
-								</Grid>
-								<Grid item md={4}>
-									<Typography sx={{ color: "#000", cursor: "pointer", textAlign: "left", fontSize: "1rem" }}>
-										{item.heading}
-									</Typography>
-									<Typography>Quantity: {quantity}</Typography>
-								</Grid>
-								<Grid item md={4}>
-									<Typography>₹{item.price}</Typography>
-									<Typography>Total: ₹{totalAmount.toLocaleString("en-IN")}.00</Typography>
-								</Grid>
-							</React.Fragment>
-							)
-							
+									<Grid item md={3}>
+										<img src={item.productBannerPhoto} style={{ height: "50px", width: "50px" }} alt="Product" />
+									</Grid>
+									<Grid item md={4}>
+										<Typography sx={{ color: "#000", cursor: "pointer", textAlign: "left", fontSize: "1rem" }}>
+											{item.heading}
+										</Typography>
+										<Typography>Quantity: {quantity}</Typography>
+									</Grid>
+									<Grid item md={4}>
+										<Typography>₹{item.price}</Typography>
+										<Typography>Total: ₹{totalAmount.toLocaleString("en-IN")}.00</Typography>
+									</Grid>
+								</React.Fragment>
+							);
 						})}
 					</Grid>
 					<Divider style={{ marginTop: "5%" }} />
@@ -297,7 +341,7 @@ const Checkout = () => {
 								<Button sx={styles.emailButton}>Apply</Button>
 							</Box>
 							<Grid display="flex" justifyContent="end">
-								<Button sx={styles.sendButton} endIcon={<SendIcon />}>
+								<Button sx={styles.sendButton} type="submit" value="register" onClick={PostData} endIcon={<SendIcon />}>
 									Proceed to Payment
 								</Button>
 							</Grid>
