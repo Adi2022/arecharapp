@@ -19,7 +19,8 @@ import Buttons from "../common/Buttons";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {useCartContext}  from '../CartContext'
-
+import axios from 'axios';
+import {useAuth} from '../AuthContext'
 const pages = [
   {
     path: "/",
@@ -55,6 +56,8 @@ const Header = () => {
   const { cartCount } = useCartContext();
 
   const navigate = useNavigate();
+  const auth=useAuth()
+
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [selectedPage, setSelectedPage] = React.useState(pages[0].path);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -96,6 +99,7 @@ const Header = () => {
   const handleBlogs = (id) => {
 		navigate(`/shop/singleProduct/${id}`);
 	};
+
 
   return (
     <AppBar
@@ -256,14 +260,23 @@ const Header = () => {
                   style={{ width: "100px" }}
                 />
               </Typography>
-              <Button
-                style={{ color: "#000" }}
-                component={NavLink}
-                to="/login"
-                sx={{ mx: 1 }}
-              >
-                Login
-              </Button>
+              {auth.isLoggedIn ? (
+            <Button
+              style={{ color: "#000" }}
+              onClick={auth.logout} // Assuming you have a logout function in AuthContext
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              style={{ color: "#000" }}
+              component={NavLink}
+              to="/login"
+              sx={{ mx: 1 }}
+            >
+              Login
+            </Button>
+          )}
               <Button
                 style={{ color: "#fff", backgroundColor: "#009090" }}
                 component={NavLink}

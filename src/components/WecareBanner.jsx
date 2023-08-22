@@ -46,8 +46,14 @@ const styles = {
 
   // New style for the icons container
   iconsContainer: {
-    display: "flex",
-    justifyContent: "center",
+    display: {
+      xs: false, sm: true, md: true, lg: true, xl: true 
+
+    },
+    justifyContent: {
+      xs: 'center', sm:'space-around' ,md : 'space-evenly'
+
+    },
     alignItems: "center",
     marginTop: "2rem",
   },
@@ -66,7 +72,7 @@ const WecareBanner = () => {
 	const checked = true;
 	const fetchBlogs = async () => {
 		try {
-			const response = await axios.get("https://mernappback12.onrender.com/home");
+			const response = await axios.get("http://localhost:3000/home");
 			console.log(response);
 			setBlogsData(response.data.impact1); // Update this line
 		} catch (error) {
@@ -81,7 +87,6 @@ const WecareBanner = () => {
     <Grid container sx={styles.main}>
       <Box sx={{ textAlign: "center", width: "100%" }}>
       
-        {/* Four icons in a flex container */}
        
         {blogsData.map((items)=>{
           return (
@@ -91,6 +96,8 @@ const WecareBanner = () => {
            {items.homeCareHeading.subHeading}
           </Typography>
         </Fade>
+       <Grid container>
+        <Grid item md={12} xs={12}>
         <Box sx={styles.iconsContainer}>
          <img src= {items.homeCareHeading.photos13}/>
          <img src= {items.homeCareHeading.photos14}/>
@@ -99,6 +106,8 @@ const WecareBanner = () => {
          <img src= {items.homeCareHeading.photos17}/>
          <img src= {items.homeCareHeading.photos18}/>
         </Box>
+        </Grid>
+       </Grid>
             </>
           )
         })}

@@ -62,7 +62,7 @@ const BlogPageDifferentBlogs = () => {
 		fetchBlogs();
 	}, []);
 	return (
-		<Grid container spacing={2} marginBottom="6%" marginTop="4%" padding="4%">
+		<Grid container spacing={2} marginBottom="6%" marginTop="8%" padding="4%">
 			{blogsData.map((blog, index) => (
 				<Grid item xs={12} sm={6} md={4} key={index} onClick={() => handleBlogs(blog._id)}>
 					{/* <Card style={{border:"none",}}> */}

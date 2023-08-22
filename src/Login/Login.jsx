@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate,NavLink } from "react-router-dom";
 import axios from 'axios';
+import {useAuth} from "../AuthContext"
 const styles = {
 	heading: {
 		backgroundColor: "#72B280",
@@ -68,6 +69,7 @@ const styles = {
 };
 
 export default function Login() {
+	const auth=useAuth()
     const [showP, setShowP] = useState(false);
     const navigate = useNavigate();
     const [inputData, setInputData] = useState({
@@ -132,6 +134,7 @@ export default function Login() {
 			});
 			if (response.status === 200) {
 				toast.success("Login successful");
+				auth.login(inputData)
 				navigate('/');
 			} else {
 				// Handle incorrect login credentials
