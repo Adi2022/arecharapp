@@ -52,7 +52,7 @@ const pages = [
   },
 ];
 
-const Header = () => {
+const Header = ({user, handleLogOut}) => {
   const { cartCount } = useCartContext();
 
   const navigate = useNavigate();
@@ -257,7 +257,7 @@ const Header = () => {
                 <img
                   src={logo}
                   alt="logo"
-                  style={{ width: "100px" }}
+                  style={{ width: "80px" }}
                 />
               </Typography>
               {auth.isLoggedIn ? (
@@ -272,13 +272,32 @@ const Header = () => {
               style={{ color: "#000" }}
               component={NavLink}
               to="/login"
-              sx={{ mx: 1 }}
+              
             >
               Login
             </Button>
+            
           )}
-              <Button
-                style={{ color: "#fff", backgroundColor: "#009090" }}
+          
+           {user && (
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src={user.picture}
+              alt="User"
+              style={{ width: '20px', height: '20px', borderRadius: '50%' ,marginRight:"5px"}}
+            />
+            <Typography sx={{fontSize:"6px",textTransform:"uppercase",fontWeight:"700"}}>{user.name}</Typography>
+            {Object.keys(user).length !== 0 && (
+          <Button sx={{fontSize:"12px"}} color="inherit" onClick={handleLogOut}>
+            SignOut
+          </Button>
+        )}
+          </div>
+          
+        )}
+          
+              <Button 
+                style={{ color: "#fff", backgroundColor: "#009090",fontSize:"8px" }}
                 component={NavLink}
                 to="/shop"
               >
@@ -292,6 +311,7 @@ const Header = () => {
                 <ShoppingCartOutlinedIcon /><span style={{marginTop:"-50%"}}>{cartCount}</span>
               </IconButton>
             </Box>
+            
           </Box>
         </Hidden>
       </Toolbar>

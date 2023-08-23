@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {Button,InputAdornment} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Button, InputAdornment } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -14,9 +14,11 @@ import GoogleIcon from "@mui/icons-material/Google";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useNavigate,NavLink } from "react-router-dom";
-import axios from 'axios';
-import {useAuth} from "../AuthContext"
+import { useNavigate, NavLink } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../AuthContext";
+import jwt_decode from "jwt-decode";
+import Header from "../Layout/Header";
 const styles = {
 	heading: {
 		backgroundColor: "#72B280",
@@ -69,82 +71,111 @@ const styles = {
 };
 
 export default function Login() {
-	const auth=useAuth()
-    const [showP, setShowP] = useState(false);
+	const [user, setUser] = useState({});
     const navigate = useNavigate();
-    const [inputData, setInputData] = useState({
-        email: "",
-        password: "",
-      });
-      const handleInput = (e) => {
-        const { name, value } = e.target;
-        setInputData({
-          ...inputData,
-          [name]: value,
-        });
-      };
-      const handleTogglePassword = () => {
-        setShowP(!showP);
-      };
+	let handleCallbackResponse = (response) => {
+		console.log(response.credential);
+		let userObject = jwt_decode(response.credential);
+		setUser(userObject);
+		
+		document.getElementById("login").hidden = true;
+		
+	};
 
-      const validateEmail = (email) => {
-        // Email validation logic (e.g., regex)
-        // if no email is entered
-      
-    // if email is entered
-    
-    
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-      };
-    
-      const validatePassword = (password) => {
-        // Password validation logic
-        // Here, we're checking if the password length is at least 6 characters
-        return password.length >= 6;
-      };
-      const PostData = async (e) => {
-        e.preventDefault();
-        const { email, password } = inputData;
-        if (!email.trim()) {
-          toast.error("Email is required");
-          return;
-        }
-      
-        if (!password.trim()) {
-          toast.error("Password is required");
-          return;
-        }
-        // Validate email and password
-        if (!validateEmail(email)) {
-          toast.error("Invalid email address");
-          return;
-        }
-        // if noo email is entered
-         
-        if (!validatePassword(password)) {
-          toast.error("Password should have atleast 6 characters");
-          return 
-        }
-       
+	useEffect(() => {
+		google.accounts.id.initialize({
+			client_id: "549282836076-s5254l649vtvm9ugr7s4cgjj3ceicl2f.apps.googleusercontent.com",
+			callback: handleCallbackResponse,
+		});
+
+		google.accounts.id.renderButton(document.getElementById("login"), {
+			theme: "dark",
+			size: "large",
+			shape: "pill",
+
+		});
+
+		google.accounts.id.prompt()
+	}, []);
+
+	let handleLogOut = () => {
+		setUser({});
+		document.getElementById("login").hidden = false;
+	};
+	const auth = useAuth();
+	const [showP, setShowP] = useState(false);
+	
+	const [inputData, setInputData] = useState({
+		email: "",
+		password: "",
+	});
+	const handleInput = (e) => {
+		const { name, value } = e.target;
+		setInputData({
+			...inputData,
+			[name]: value,
+		});
+	};
+	const handleTogglePassword = () => {
+		setShowP(!showP);
+	};
+
+	const validateEmail = (email) => {
+		// Email validation logic (e.g., regex)
+		// if no email is entered
+
+		// if email is entered
+
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return emailRegex.test(email);
+	};
+
+	const validatePassword = (password) => {
+		// Password validation logic
+		// Here, we're checking if the password length is at least 6 characters
+		return password.length >= 6;
+	};
+	const PostData = async (e) => {
+		e.preventDefault();
+		const { email, password } = inputData;
+		if (!email.trim()) {
+			toast.error("Email is required");
+			return;
+		}
+
+		if (!password.trim()) {
+			toast.error("Password is required");
+			return;
+		}
+		// Validate email and password
+		if (!validateEmail(email)) {
+			toast.error("Invalid email address");
+			return;
+		}
+		// if noo email is entered
+
+		if (!validatePassword(password)) {
+			toast.error("Password should have atleast 6 characters");
+			return;
+		}
+
 		try {
-			const response = await axios.post('http://localhost:3000/login', {
-			  email,
-			  password,
+			const response = await axios.post("http://localhost:3000/login", {
+				email,
+				password,
 			});
 			if (response.status === 200) {
 				toast.success("Login successful");
-				auth.login(inputData)
-				navigate('/');
+				auth.login(inputData);
+				navigate("/shop");
 			} else {
 				// Handle incorrect login credentials
 				toast.error("Incorrect email or password");
 			}
-			
-		  } catch (error) {
+		} catch (error) {
 			console.log(error);
-		  }
-      };
+		}
+	};
 
 	return (
 		<>
@@ -167,7 +198,9 @@ export default function Login() {
 				>
 					<Typography sx={styles.heading}>Sign in</Typography>
 
-					<Typography sx={styles.heading2}>Don't have an account? <NavLink   to="/register">Sign Up</NavLink></Typography>
+					<Typography sx={styles.heading2}>
+						Don't have an account? <NavLink to="/register">Sign Up</NavLink>
+					</Typography>
 
 					<span style={{ color: "white", width: "100%" }}>OR</span>
 
@@ -180,16 +213,17 @@ export default function Login() {
 							<Typography sx={styles.social}>FACEBOOK</Typography>
 						</Grid>
 						<Grid item xs={6} md={6} sx={styles.gridRight}>
-							<IconButton sx={styles.iconButton} aria-label="Google">
-								<GoogleIcon />
-							</IconButton>
-							<Typography sx={styles.social}>GOOGLE</Typography>
+							
+							<Header user={user} handleLogOut={handleLogOut} />
+							<Typography sx={styles.social}>
+							<div id="login"></div>
+							</Typography>
 						</Grid>
 					</Grid>
 					<span style={{ color: "white", width: "100%", marginTop: "10%" }}>OR</span>
 					<Typography sx={styles.heading2}>Sign in with existing account</Typography>
 
-					<Box component="form"  noValidate sx={{ mt: 1 }}>
+					<Box component="form" noValidate sx={{ mt: 1 }}>
 						<TextField
 							margin="normal"
 							fullWidth
@@ -199,37 +233,36 @@ export default function Login() {
 							autoComplete="email"
 							autoFocus
 							sx={styles.formTextField}
-                            value={inputData.email}
-                            onChange={handleInput}
+							value={inputData.email}
+							onChange={handleInput}
 						/>
 						<TextField
 							margin="normal"
 							fullWidth
 							name="password"
 							placeholder="Password"
-                            type={showP ? "text" : "password"}
+							type={showP ? "text" : "password"}
 							id="password"
 							autoComplete="current-password"
 							sx={styles.formTextField}
-                            value={inputData.password}
-                            onChange={handleInput}
-                            InputProps={{
-                                endAdornment: (
-                                  <InputAdornment position="end">
-                                    <IconButton onClick={handleTogglePassword} edge="end">
-                                      {showP ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                  </InputAdornment>
-                                ),
-                              }}
+							value={inputData.password}
+							onChange={handleInput}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton onClick={handleTogglePassword} edge="end">
+											{showP ? <VisibilityOff /> : <Visibility />}
+										</IconButton>
+									</InputAdornment>
+								),
+							}}
 						/>
 						<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
 						<Button
-							
 							fullWidth
-                            type="submit"
-                            value="register"
-                            onClick={PostData}
+							type="submit"
+							value="register"
+							onClick={PostData}
 							style={{ backgroundColor: "#72B280", color: "#fff", fontWeight: 700 }}
 							sx={{ mt: 3, mb: 2 }}
 						>
@@ -237,27 +270,31 @@ export default function Login() {
 						</Button>
 						<Grid container>
 							<Grid item xs>
-                            <Typography sx={styles.heading2}><NavLink   to="/forgot_password">Forgot Password?</NavLink> </Typography>
+								<Typography sx={styles.heading2}>
+									<NavLink to="/forgot_password">Forgot Password?</NavLink>{" "}
+								</Typography>
 							</Grid>
 							<Grid item>
-                            <Typography sx={styles.heading2}>Don't have an account? <NavLink   to="/register">Sign Up</NavLink></Typography>
+								<Typography sx={styles.heading2}>
+									Don't have an account? <NavLink to="/register">Sign Up</NavLink>
+								</Typography>
 							</Grid>
 						</Grid>
 					</Box>
 				</Box>
 			</Container>
-            <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 		</>
 	);
 }
