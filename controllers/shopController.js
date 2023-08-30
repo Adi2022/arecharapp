@@ -1,15 +1,17 @@
 const Shopping = require("../models/shopModel");
 
 const createShopping = async (req, res) => {
-  const { shop, productVitagoli, product1 } = req.body;
+  const { shop, productVitagoli, product1,quantity } = req.body;
 
   try {
+    const calculatedPrice = price * quantity;
     const newShopping = await Shopping.create({
       shop: {
         heading: shop.heading,
         subHeading: shop.subHeading,
         description: shop.description,
       },
+     
       productVitagoli: {
         name: productVitagoli.name,
         content: productVitagoli.content,
@@ -21,7 +23,6 @@ const createShopping = async (req, res) => {
         singleProduct1: {
           photos: product1.singleProduct1.photos,
           quantity: product1.singleProduct1.quantity,
-          total: product1.singleProduct1.total,
           productBannerPhoto: product1.singleProduct1.productBannerPhoto,
           productQualityPhotos: product1.singleProduct1.productQualityPhotos,
           heading: product1.singleProduct1.heading,
@@ -94,6 +95,49 @@ const createShopping = async (req, res) => {
   }
 };
 
+const increaseProductQuantity = async (productId, quantityToAdd) => {
+  try {
+    const shoppingEntry = await Shopping.findById(productId);
+
+    if (!shoppingEntry) {
+      throw new Error("Shopping entry not found");
+    }
+
+    shoppingEntry.product1.singleProduct1.quantity += quantityToAdd;
+    shoppingEntry.product1.singleProduct1.price = shoppingEntry.product1.singleProduct1.price +
+      shoppingEntry.product1.singleProduct1.price * quantityToAdd; // Recalculate price
+    await shoppingEntry.save();
+
+    return shoppingEntry;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const decreaseProductQuantity = async (productId, quantityToSubtract) => {
+  try {
+    const shoppingEntry = await Shopping.findById(productId);
+
+    if (!shoppingEntry) {
+      throw new Error("Shopping entry not found");
+    }
+
+    if (shoppingEntry.product1.singleProduct1.quantity < quantityToSubtract) {
+      throw new Error("Insufficient quantity");
+    }
+
+    shoppingEntry.product1.singleProduct1.quantity -= quantityToSubtract;
+    shoppingEntry.product1.singleProduct1.price = shoppingEntry.product1.singleProduct1.price -
+      shoppingEntry.product1.singleProduct1.price * quantityToSubtract; // Recalculate price
+    await shoppingEntry.save();
+
+    return shoppingEntry;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const getAllShop = async (req, res) => {
   try {
     const shoppingEntries = await Shopping.find();
@@ -129,4 +173,4 @@ const singleProduct=async(req, res)=>{
 
 
 
-module.exports = { createShopping, getAllShop ,singleProduct};
+module.exports = { createShopping, getAllShop ,singleProduct,increaseProductQuantity,decreaseProductQuantity};

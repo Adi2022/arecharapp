@@ -22,6 +22,9 @@ const productSchema = new mongoose.Schema({
       type : String
     }
   ],
+  quantity:{
+    type:Number
+  }
 });
 
 const Product = mongoose.model('Products', productSchema);
