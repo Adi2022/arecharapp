@@ -53,7 +53,7 @@ const ImpactHeading = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/impact1") // Replace with your API endpoint
+      .get("https://myapp-8q5z.onrender.com/impact1") // Replace with your API endpoint
       .then((response) => {
         console.log(response);
         setImpactData(response.data.impact1);

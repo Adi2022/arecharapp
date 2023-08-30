@@ -65,7 +65,7 @@ const SingleBlogData = () => {
 
 	const getSingleBlog = async () => {
 		try {
-			const res = await fetch(`http://localhost:3000/blog/${params.id}`);
+			const res = await fetch(`https://myapp-8q5z.onrender.com/blog/${params.id}`);
 			const data = await res.json();
 			console.log(data);
 			setSingleBlog(data);

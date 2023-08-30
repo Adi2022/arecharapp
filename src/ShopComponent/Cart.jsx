@@ -10,28 +10,49 @@ import { NavLink, useNavigate } from "react-router-dom";
 import queryString from "query-string";
 
 const Cart = () => {
-	const [totalCartAmount, setTotalCartAmount] = useState(0);
 
 	const { cartItems, removeFromCart, clearCart,setCartItems } = useCartContext();
-	console.log(cartItems)
+	// console.log(cartItems)
 	const navigate = useNavigate();
 	const [itemQuantities, setItemQuantities] = useState({});
 	const handleDecrement = (itemId) => {
-		if (itemQuantities[itemId] > 1) {
-			setItemQuantities((prevQuantities) => ({
-				...prevQuantities,
-				[itemId]: prevQuantities[itemId] - 1,
-			}));
-		}
-	};
-	const handleIncrement = (itemId) => {
-		if (itemQuantities[itemId] < 20) {
-			setItemQuantities((prevQuantities) => ({
-				...prevQuantities,
-				[itemId]: prevQuantities[itemId] + 1,
-			}));
-		}
-	};
+        if (itemQuantities[itemId] > 1) {
+            setItemQuantities((prevQuantities) => ({
+                ...prevQuantities,
+                [itemId]: prevQuantities[itemId] - 1,
+            }));
+
+            updateLocalStoragePrice(itemId, itemQuantities[itemId] - 1);
+        }
+    };
+
+    const handleIncrement = (itemId) => {
+        if (itemQuantities[itemId] < 20) {
+            setItemQuantities((prevQuantities) => ({
+                ...prevQuantities,
+                [itemId]: prevQuantities[itemId] + 1,
+            }));
+
+            updateLocalStoragePrice(itemId, itemQuantities[itemId] + 1);
+        }
+    };
+
+    const updateLocalStoragePrice = (itemId, quantity) => {
+        const updatedCartItems = cartItems.map((item) => {
+            if (item.id === itemId) {
+                return {
+                    ...item,
+                    quantity: quantity,
+                    totalAmount: item.price * quantity,
+                };
+            }
+            return item;
+        });
+
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+        setCartItems(updatedCartItems);
+    };
+
 	const movetoShop = () => {
 		navigate("/shop");
 	};
@@ -59,13 +80,22 @@ const Cart = () => {
 	  }, [cartItems]);
 	
 	  useEffect(() => {
-		// Retrieve cart items from localStorage on component mount
-		const savedCartItems = localStorage.getItem("cartItems");
-		if (savedCartItems) {
-		  const parsedCartItems = JSON.parse(savedCartItems);
-		  setCartItems(parsedCartItems);
-		}
-	  }, []);
+		const quantities = {};
+		const updatedCartItems = cartItems.map((item) => {
+			const quantity = itemQuantities[item.id] || 1;
+			quantities[item.id] = quantity;
+			return {
+				...item,
+				quantity: quantity,
+				totalAmount: item.price * quantity,
+			};
+		});
+		setItemQuantities(quantities);
+	
+		localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+		setCartItems(updatedCartItems);
+	}, [cartItems, itemQuantities]);
+
 	
 	return (
 		<Grid marginTop="0%" padding="12%">

@@ -20,6 +20,7 @@ import Cart from '../ShopComponent/Cart';
 import SingleProduct from '../ShopComponent/SingleProduct';
 import Checkout from '../ShopComponent/Checkout';
 import CartLatest from '../ShopComponent/CartLatest';
+import Payment from '../ShopComponent/Payment';
 
 const ProtectedShopRoute = ({ element }) => {
   const { isLoggedIn } = useAuth();
@@ -52,6 +53,8 @@ const Routing = () => {
           <Route path="/productVitagoli" element={<Products />} />
 
           <Route path="/login" element={<Login />} />
+          <Route path="/payment" element={<Payment />} />
+
           <Route path="/register" element={<Register />} />
           <Route path="/forgot_password" element={<ForgotPassword />} />
         </Routes>

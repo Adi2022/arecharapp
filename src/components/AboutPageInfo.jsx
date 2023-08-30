@@ -30,7 +30,7 @@ const AboutPageInfo = () => {
 
 	const fetchBlogs = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/about1");
+			const response = await axios.get("https://myapp-8q5z.onrender.com/about1");
 			console.log(response);
 			setBlogsData(response.data.about1);
 		} catch (error) {

@@ -4,7 +4,7 @@ import { Grid, Card, CardMedia, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { NavLink, useNavigate } from "react-router-dom";
 import Fade from "@mui/material/Fade";
-
+import {} from '../AppContext'
 const styles = {
 	bannerTitleStyle32: {
 		color: "#000",
@@ -92,7 +92,7 @@ const ShopProducts = () => {
 	const [blogsData, setBlogsData] = useState([]);
 	const fetchBlogs = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/shop");
+			const response = await axios.get("https://myapp-8q5z.onrender.com/shop");
 			console.log(response);
 			setBlogsData(response.data.shoppingEntries);
 		} catch (error) {

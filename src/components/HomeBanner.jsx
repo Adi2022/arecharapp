@@ -17,7 +17,7 @@ const HomeBanner = () => {
   const [blogsData, setBlogsData] = useState([]);
   const fetchBlogs = async () => {
 		try {
-			const response = await axios.get("https://mernappback12.onrender.com/home");
+			const response = await axios.get("https://myapp-8q5z.onrender.com/home");
 			console.log(response);
       setBlogsData(response.data.impact1[0].homeBanner.homephotos); // Update this line
 		} catch (error) {

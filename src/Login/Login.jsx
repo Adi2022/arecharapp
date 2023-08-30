@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -19,6 +18,7 @@ import axios from "axios";
 import { useAuth } from "../AuthContext";
 import jwt_decode from "jwt-decode";
 import Header from "../Layout/Header";
+import ShopProducts from '../ShopComponent/ShopProducts'
 const styles = {
 	heading: {
 		backgroundColor: "#72B280",
@@ -71,22 +71,40 @@ const styles = {
 };
 
 export default function Login() {
-	const [user, setUser] = useState({});
+	 // Possible values: null, true, false
+	 const [authStatus, setAuthStatus] = useState(() => {
+        const storedAuthStatus = localStorage.getItem("authStatus");
+        return storedAuthStatus === "false";
+    });
+     
+	const [inputData, setInputData] = useState({
+		email: "atadityatrivedi9@gmail.com",
+		password: "123456",
+	});
+	const [user,setUser]=useState({})
     const navigate = useNavigate();
+	const auth = useAuth();
+	const [showP, setShowP] = useState(false);
+	
 	let handleCallbackResponse = (response) => {
 		console.log(response.credential);
 		let userObject = jwt_decode(response.credential);
 		setUser(userObject);
-		
+		console.log(userObject)
 		document.getElementById("login").hidden = true;
+
 		
 	};
-
 	useEffect(() => {
 		google.accounts.id.initialize({
 			client_id: "549282836076-s5254l649vtvm9ugr7s4cgjj3ceicl2f.apps.googleusercontent.com",
 			callback: handleCallbackResponse,
 		});
+		if (Object.keys(user).length > 0) {
+			setAuthStatus(true); // User is authenticated
+		} else {
+			setAuthStatus(false); // User is not authenticated
+		}
 
 		google.accounts.id.renderButton(document.getElementById("login"), {
 			theme: "dark",
@@ -96,19 +114,15 @@ export default function Login() {
 		});
 
 		google.accounts.id.prompt()
-	}, []);
-
-	let handleLogOut = () => {
-		setUser({});
-		document.getElementById("login").hidden = false;
-	};
-	const auth = useAuth();
-	const [showP, setShowP] = useState(false);
+		
 	
-	const [inputData, setInputData] = useState({
-		email: "",
-		password: "",
-	});
+	}, [user]);
+	const handleLogOut = () => {
+         setUser({});
+        document.getElementById("login").hidden = false;
+         // Update auth status
+		 
+    };
 	const handleInput = (e) => {
 		const { name, value } = e.target;
 		setInputData({
@@ -160,14 +174,17 @@ export default function Login() {
 		}
 
 		try {
-			const response = await axios.post("http://localhost:3000/login", {
+			const response = await axios.post("https://myapp-8q5z.onrender.com/login", {
 				email,
 				password,
 			});
 			if (response.status === 200) {
 				toast.success("Login successful");
+				
 				auth.login(inputData);
 				navigate("/shop");
+				setAuthStatus(true);
+				
 			} else {
 				// Handle incorrect login credentials
 				toast.error("Incorrect email or password");
@@ -179,7 +196,12 @@ export default function Login() {
 
 	return (
 		<>
-			<Container component="main" maxWidth="sm">
+			{authStatus===null?(
+				<div>.....Loading</div>
+			):authStatus?(
+				<ShopProducts/>
+			):(
+				<Container component="main" maxWidth="sm">
 				<Box
 					sx={{
 						boxShadow: 3,
@@ -283,6 +305,8 @@ export default function Login() {
 					</Box>
 				</Box>
 			</Container>
+			)
+		}
 			<ToastContainer
 				position="top-right"
 				autoClose={5000}

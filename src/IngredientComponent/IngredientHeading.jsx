@@ -48,7 +48,7 @@ const IngredientHeading = () => {
 	const checked = true;
 	const fetchBlogs = async () => {
 		try {
-			const response = await axios.get(`https://mernappback12.onrender.com/ingredient`);
+			const response = await axios.get(`https://myapp-8q5z.onrender.com/ingredient`);
 			console.log(response);
 			setBlogsData(response.data.blogs);
 		} catch (error) {

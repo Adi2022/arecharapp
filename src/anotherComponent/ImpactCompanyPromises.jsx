@@ -39,7 +39,7 @@ const ImpactCompanyPromises = () => {
 
 	const fetchImpact2 = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/impact2");
+			const response = await axios.get("https://myapp-8q5z.onrender.com/impact2");
 			console.log(response);
 			setImpact2Data(response.data.impact2);
 		} catch (error) {

@@ -263,7 +263,10 @@ const Header = ({user, handleLogOut}) => {
               {auth.isLoggedIn ? (
             <Button
               style={{ color: "#000" }}
-              onClick={auth.logout} // Assuming you have a logout function in AuthContext
+              onClick={auth.logout}
+               // Assuming you have a logout function in AuthContext
+               component={NavLink}
+               to="/shop"
             >
               Logout
             </Button>

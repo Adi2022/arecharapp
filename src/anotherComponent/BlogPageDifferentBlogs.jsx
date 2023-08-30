@@ -46,7 +46,7 @@ const BlogPageDifferentBlogs = () => {
 	const [selectedBlogId, setSelectedBlogId] = useState(null);
 	const fetchBlogs = async () => {
 		try {
-			const response = await axios.get("http://localhost:3000/blog");
+			const response = await axios.get("https://myapp-8q5z.onrender.com/blog");
 			console.log(response);
 			setBlogsData(response.data.blogs);
 		} catch (error) {

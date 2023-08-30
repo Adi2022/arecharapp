@@ -139,11 +139,11 @@ const SingleProduct = () => {
 									<CardContent>
 										{/* ... other content ... */}
 										<Grid container justifyContent="start" alignItems="center" gap="25%">
-											<Typography
+											{/* <Typography
 												sx={{ textTransform: "uppercase", fontSize: "15px", lineHeight: "23px", fontWeight: "400" }}
 											>
 												Quantity
-											</Typography>
+											</Typography> */}
 											<Typography
 												sx={{ textTransform: "uppercase", fontSize: "25px", lineHeight: "50px", fontWeight: "700" }}
 											>
@@ -159,15 +159,15 @@ const SingleProduct = () => {
 												marginTop: "10px", // Add a margin to separate buttons from the previous content
 											}}
 										>
-											<Button onClick={handleDecrement} size="small" variant="contained">
+											{/* <Button onClick={handleDecrement} size="small" variant="contained">
 												-
-											</Button>
-											<Button size="small" variant="outlined">
+											</Button> */}
+											{/* <Button size="small" variant="outlined">
 												{amount}
-											</Button>
-											<Button onClick={handleIncrement} size="small" variant="contained">
+											</Button> */}
+											{/* <Button onClick={handleIncrement} size="small" variant="contained">
 												+
-											</Button>
+											</Button> */}
 										</Box>
 									</CardContent>
 								</Card>
